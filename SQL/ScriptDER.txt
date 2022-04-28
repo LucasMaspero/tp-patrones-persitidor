@@ -1,0 +1,52 @@
+// Copiar y pegar este script https://dbdiagram.io/d
+
+// TABLAS
+TABLE sesion {
+   id_sesion INT pk
+   ultimo_acceso TIMESTAMP
+}
+
+TABLE clase {
+   id_clase INT pk
+   nombre VARCHAR
+}
+
+TABLE primitivo {
+   id_primitivo INT pk
+   nombre VARCHAR
+}
+
+TABLE objeto {
+   id_objeto INT pk
+   id_sesion INT
+   id_clase INT
+}
+
+TABLE atributo {
+   id_atributo INT pk
+   nombre VARCHAR
+   id_clase INT
+   id_tipo_clase INT
+   id_tipo_primitivo INT
+   es_coleccion BOOLEAN
+}
+
+TABLE valor {
+   id_valor INTEGER pk
+   id_objeto INTEGER
+   id_atributo INTEGER
+   valor_primitivo VARCHAR
+   id_objeto_valor INT
+}
+
+// REFERENCIAS
+Ref: objeto.id_sesion > sesion.id_sesion
+Ref: objeto.id_clase > clase.id_clase
+
+Ref: atributo.id_clase > clase.id_clase
+Ref: atributo.id_tipo_clase > clase.id_clase
+Ref: atributo.id_tipo_primitivo > primitivo.id_primitivo
+
+Ref: valor.id_objeto > objeto.id_objeto
+Ref: valor.id_objeto_valor > objeto.id_objeto
+Ref: valor.id_atributo > atributo.id_atributo
