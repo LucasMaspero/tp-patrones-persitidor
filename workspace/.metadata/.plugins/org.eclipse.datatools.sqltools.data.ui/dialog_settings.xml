@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="Extract/Load file format wizard page">
+		<item value="Comma" key="Column delimiter"/>
+		<item value="&quot;" key="String delimiter"/>
+		<item value="C:\Users\maspe\Desktop\g.data" key="File path"/>
+	</section>
+</section>

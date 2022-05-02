@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;tp-patrones-persitidor&apos;" deleteContents="false" description="Delete resource &apos;tp-patrones-persitidor&apos;" element1="/tp-patrones-persitidor" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1651504526588"/>&#x0A;<refactoring comment="Rename resource &apos;SpringBootFullStarter_1.3_algo2&apos; to &apos;tp-patrones-persistidor&apos;" description="Rename resource &apos;SpringBootFullStarter_1.3_algo2&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/SpringBootFullStarter_1.3_algo2" name="tp-patrones-persistidor" stamp="1651504558217" updateReferences="true"/>
+</session>

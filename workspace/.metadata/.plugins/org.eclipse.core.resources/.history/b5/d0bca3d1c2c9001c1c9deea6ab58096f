@@ -1,0 +1,32 @@
+package pablosz.demo;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class MiRestController
+{
+	@Autowired
+	private EntityManager em;
+	
+	@RequestMapping("/clases")
+	public List<String> obtenerClases()
+	{
+		String hql="";
+		hql+="SELECT c.nombre ";
+		//hql+="FROM Clase c";
+		//hql+="FROM CLASE c";
+		hql+="FROM Clase c";
+		
+		Query q = em.createNativeQuery(hql);
+		
+		List<String> lst = q.getResultList();
+		return lst;
+	}
+}
