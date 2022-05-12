@@ -1,0 +1,7 @@
+package persistidor.repositorios;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface RepositorioDeSesiones extends CrudRepository<Sesion, Long>
+{
+}

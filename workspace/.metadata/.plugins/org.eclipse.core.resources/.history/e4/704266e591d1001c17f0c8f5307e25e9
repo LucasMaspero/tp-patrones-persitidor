@@ -1,0 +1,49 @@
+package principal.servicios;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import principal.entidades.Clase;
+import principal.servicios.repositorios.IRepositorioDeClases;
+
+@Service
+public class ServicioDeClases implements IServicioDeClases
+{
+	@Autowired
+	private IRepositorioDeClases repositorioDeClases;
+
+	@Override
+	public List<Clase> obtenerTodasLasClases()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Clase obtenerClasePorId(long idClase)
+	{
+		Clase clase = repositorioDeClases.findById(idClase).get();
+		return clase;
+	}
+
+	@Override
+	public boolean agregarClase(Clase clase)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void actualizarClase(Clase clase)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminarClase(int idClase)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+}

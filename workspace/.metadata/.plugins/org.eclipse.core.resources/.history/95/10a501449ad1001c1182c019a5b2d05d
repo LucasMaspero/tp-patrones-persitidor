@@ -1,0 +1,6 @@
+package persistidor.repositorios;
+
+public class RepositorioDeSesiones
+{
+
+}

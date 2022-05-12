@@ -1,0 +1,45 @@
+package persistidor.servicios;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import persistidor.entidades.Objeto;
+import persistidor.repositorios.RepositorioDeObjetos;
+
+@Service
+public class ServicioDeObjetos
+{
+	@Autowired
+	private RepositorioDeObjetos repositorioDeObjetos;
+
+	public List<Objeto> obtenerTodosLosObjetos()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Objeto obtenerObjetoPorId(long idObjeto)
+	{
+		Objeto Objeto = repositorioDeObjetos.findById(idObjeto).get();
+		return Objeto;
+	}
+
+	public boolean agregarObjeto(Objeto Objeto)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void actualizarObjeto(Objeto Objeto)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void eliminarObjeto(int idObjeto)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+}

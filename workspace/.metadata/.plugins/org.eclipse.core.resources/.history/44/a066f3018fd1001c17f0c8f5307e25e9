@@ -1,0 +1,19 @@
+package principal.servicios;
+
+import java.util.List;
+import org.springframework.stereotype.Service;
+import principal.entidades.Clase;
+
+@Service
+public interface IServicioDeClases
+{
+	List<Clase> obtenerTodasLasClases();
+	
+	Clase obtenerClasePorId(long idClase);
+	
+    boolean agregarClase(Clase clase);
+    
+    void actualizarClase(Clase clase);
+    
+    void eliminarClase(int idClase);
+}

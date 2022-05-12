@@ -1,0 +1,7 @@
+package principal;
+
+import org.springframework.data.repository.CrudRepository;
+
+public interface IRepositorioDeClases extends CrudRepository<Clase, Long>
+{
+}

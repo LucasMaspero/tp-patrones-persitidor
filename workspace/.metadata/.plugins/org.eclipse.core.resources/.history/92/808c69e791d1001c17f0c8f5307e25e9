@@ -1,0 +1,10 @@
+package principal.servicios.repositorios;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import principal.entidades.Clase;
+
+@Repository
+public interface IRepositorioDeClases extends CrudRepository<Clase, Long>
+{
+}

@@ -1,0 +1,23 @@
+package persistidor.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+import persistidor.entidades.Objeto;
+import persistidor.servicios.ServicioDeObjetos;
+
+@RestController
+public class MiRestController
+{
+	@Autowired
+	private ServicioDeObjetos servicioDeObjetos;
+
+   @GetMapping("sesion/{id}")
+	public ResponseEntity<Objeto> getSesionById(@PathVariable("id") Integer id) {
+		Objeto objeto = servicioDeObjetos.obtenerObjetoPorId(id);
+		return new ResponseEntity<Objeto>(objeto, HttpStatus.OK);
+	}
+}
