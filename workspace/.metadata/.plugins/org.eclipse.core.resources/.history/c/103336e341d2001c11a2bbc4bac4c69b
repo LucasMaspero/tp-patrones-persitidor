@@ -1,0 +1,7 @@
+package persistidor.comandos;
+
+@Component
+public class ObtenerTiempoTranscurridoDeSesionComando
+{
+
+}

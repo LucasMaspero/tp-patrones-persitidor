@@ -1,0 +1,14 @@
+package persistidor.comandos;
+
+import org.springframework.stereotype.Component;
+
+import persistidor.entidades.Objeto;
+
+@Component
+public class CrearObjetoDesdeUnObjectComando
+{
+	public Objeto Ejecutar()
+	{
+		
+	}
+}

@@ -1,0 +1,30 @@
+package persistidor.api;
+
+public class PersistentObject
+{
+	public boolean store(long sId, Object o)
+	{
+		// TO DO
+		return false;
+	}
+	
+	public <T> T load(long sId, Class<T> clazz)
+	{
+		
+	}
+	
+	public boolean exists(long sId, Class<T> clazz)
+	{
+		
+	}
+	
+	public long elapsedTime(long sId)
+	{
+		return sId;
+	}
+	
+	public <T> T delete(long sId, Class<T> clazz)
+	{
+		return null;
+	}
+}

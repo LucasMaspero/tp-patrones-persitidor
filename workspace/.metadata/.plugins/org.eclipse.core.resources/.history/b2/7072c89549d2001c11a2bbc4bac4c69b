@@ -1,0 +1,9 @@
+package persistidor.anotaciones;
+
+import java.lang.annotation.Retention;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.Type)
+public @interface Persistable 
+{
+}

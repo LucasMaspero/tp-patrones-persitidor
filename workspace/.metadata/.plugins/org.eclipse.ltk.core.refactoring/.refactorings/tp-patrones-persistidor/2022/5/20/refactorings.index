@@ -12,3 +12,11 @@
 1652322300481	Delete element
 1652322757573	Delete element
 1652322950764	Encapsulate field 'nombre'
+1652391144236	Rename type 'MiRestController'
+1652391170312	Rename package 'persistidor.controllers'
+1652394736363	Rename compilation unit 'CrearObjetoComando.java'
+1652394834845	Rename type 'ActualizarObjetoComando'
+1652394899447	Rename type 'EliminarObjetoComando'
+1652394906463	Rename type 'ExisteObjetoComando'
+1652395912377	Rename type 'CrearObjectDesdeUnaEntidadObjetoComando'
+1652395920060	Rename type 'CrearObjetoDesdeUnObjectComando'

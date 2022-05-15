@@ -1,0 +1,10 @@
+package persistidor.comandos;
+
+public class ObtenerInstanciaDeClaseParaSesionComando
+{
+	public <T> T Ejecutar(long sId, Class<T> clazz)
+	{
+		// TO DO
+		return null;
+	}
+}

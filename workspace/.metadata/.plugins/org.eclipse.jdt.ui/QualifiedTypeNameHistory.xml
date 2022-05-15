@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="javax.persistence.Temporal"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="javax.persistence.TemporalType"/>
@@ -24,14 +23,12 @@
 <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
 <fullyQualifiedTypeName name="servicios.ServicioDeClases"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan"/>
 <fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeClases"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeClases"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Clase"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeObjetos"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Atributo"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Primitivo"/>
@@ -40,4 +37,16 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeSesiones"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+<fullyQualifiedTypeName name="persistidor.api.PersistentObject"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
+<fullyQualifiedTypeName name="persistidor.comandos.CrearObjetoEnLaDbComando"/>
+<fullyQualifiedTypeName name="persistidor.comandos.ExisteObjetoEnLaDbComando"/>
+<fullyQualifiedTypeName name="persistidor.comandos.ActualizarObjetoEnLaDbComando"/>
+<fullyQualifiedTypeName name="persistidor.comandos.ExisteInstanciaDeClaseParaSesionComando"/>
+<fullyQualifiedTypeName name="persistidor.comandos.ObtenerInstanciaDeClaseParaSesionComando"/>
+<fullyQualifiedTypeName name="persistidor.comandos.ObtenerTiempoTranscurridoDeSesionComando"/>
+<fullyQualifiedTypeName name="persistidor.comandos.EliminarInstanciaDeLaClaseParaSesionComando"/>
+<fullyQualifiedTypeName name="java.lang.annotation.Retention"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

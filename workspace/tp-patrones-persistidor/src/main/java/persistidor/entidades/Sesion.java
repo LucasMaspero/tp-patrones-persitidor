@@ -27,6 +27,11 @@ public class Sesion
 	@OneToMany(mappedBy = "sesion")
 	private List<Objeto> objetos;
 
+	public long getId()
+	{
+		return id;
+	}
+
 	public Date getUltimoAcceso()
 	{
 		return ultimoAcceso;

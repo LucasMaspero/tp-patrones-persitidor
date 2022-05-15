@@ -1,0 +1,9 @@
+package persistidor.comandos;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class CrearObjetoEnLaDbComando
+{
+
+}

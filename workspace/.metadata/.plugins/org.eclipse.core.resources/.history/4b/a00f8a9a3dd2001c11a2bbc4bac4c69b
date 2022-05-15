@@ -1,0 +1,34 @@
+package persistidor.servicios;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import persistidor.entidades.Sesion;
+import persistidor.repositorios.RepositorioDeSesiones;
+
+@Service
+public class ServicioDeSesiones
+{
+	@Autowired
+	private RepositorioDeSesiones repositorioDeSesiones;
+
+	public Sesion obtenerPorId(long idSesion)
+	{
+		return repositorioDeSesiones.findById(idSesion).orElse(null);
+	}
+
+	public boolean crear(Sesion Sesion)
+	{
+		// TODO
+		return false;
+	}
+
+	public void actualizar(Sesion Sesion)
+	{
+		// TODO
+	}
+
+	public void eliminar(long idSesion)
+	{
+		// TODO
+	}
+}

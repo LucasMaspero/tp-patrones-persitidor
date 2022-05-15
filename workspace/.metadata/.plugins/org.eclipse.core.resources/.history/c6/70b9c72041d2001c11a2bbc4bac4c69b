@@ -1,0 +1,6 @@
+package persistidor.api;
+
+public class PersistentObject
+{
+
+}

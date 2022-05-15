@@ -1,0 +1,39 @@
+package persistidor.api;
+
+public class PersistentObject
+{
+	// Almacena la instancia del objeto o asociada a la clave sId, 
+	// o actualiza la instancia existente retornando true o false 
+	// segun actualiza o almacena. 
+	// El objeto o puede ser null, en tal caso el valor que se 
+	// almacenara sera null.
+	public boolean store(long sId, Object o)
+	{
+		// TO DO
+		return false;
+	}
+	
+	public <T> T load(long sId, Class<T> clazz)
+	{
+		// TO DO
+		return null;
+	}
+	
+	public <T> boolean exists(long sId, Class<T> clazz)
+	{
+		// TO DO
+		return false;
+	}
+	
+	public long elapsedTime(long sId)
+	{
+		// TO DO
+		return sId;
+	}
+	
+	public <T> T delete(long sId, Class<T> clazz)
+	{
+		// TO DO
+		return null;
+	}
+}

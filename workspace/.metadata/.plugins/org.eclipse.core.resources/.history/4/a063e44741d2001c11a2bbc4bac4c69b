@@ -1,0 +1,9 @@
+package persistidor.api;
+
+public class PersistentObject
+{
+	public boolean store(long sId, Object o)
+	{
+		
+	}
+}

@@ -1,0 +1,13 @@
+package persistidor.controladores;
+
+public class Direccion
+{
+	private String calle;
+	private int numbero;
+	private String codigoPostal;
+	private String localidad;
+	private String provincia;
+	private String pais;
+	
+	
+}

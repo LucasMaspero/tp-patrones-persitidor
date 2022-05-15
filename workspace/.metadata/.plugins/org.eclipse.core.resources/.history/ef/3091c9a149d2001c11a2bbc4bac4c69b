@@ -1,0 +1,6 @@
+package persistidor.anotaciones;
+
+public class NotPersistable
+{
+
+}

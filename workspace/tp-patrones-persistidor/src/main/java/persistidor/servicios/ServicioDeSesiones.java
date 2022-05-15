@@ -16,19 +16,24 @@ public class ServicioDeSesiones
 		return repositorioDeSesiones.findById(idSesion).orElse(null);
 	}
 
-	public boolean crearSesion(Sesion Sesion)
+	public void crearSesion(Sesion sesion)
 	{
-		// TODO
-		return false;
+		repositorioDeSesiones.save(sesion);
 	}
 
-	public void actualizarSesion(Sesion Sesion)
+	public void actualizarSesion(Sesion sesion)
 	{
-		// TODO
+		long idSesion = sesion.getId();
+		Sesion sesionDeLaBaseDeDatos = this.obtenerSesionPorId(idSesion);
 	}
 
 	public void eliminarSesion(long idSesion)
 	{
-		// TODO
+		repositorioDeSesiones.deleteById(idSesion);
+	}
+	
+	public boolean existeSesion(long idSesion)
+	{
+		return repositorioDeSesiones.existsById(idSesion);
 	}
 }
