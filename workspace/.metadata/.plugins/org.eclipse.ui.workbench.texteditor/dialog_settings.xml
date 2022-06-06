@@ -2,20 +2,24 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value=" = " key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="="/>
-			<item value="Sesion"/>
-			<item value="Objeto"/>
-			<item value="Atributo"/>
-			<item value="Clase"/>
-			<item value="Class objectClass = object.getClass();"/>
+			<item value="CLASE_ATRIBUTOS"/>
+			<item value="Direccion1"/>
+			<item value="LaMejorDireccion"/>
+			<item value="Atributo atributoCalleDeDireccion = new Atributo(&quot;calle&quot;, false);"/>
+			<item value="instancia"/>
+			<item value="ExisteObjetoEnLaDbComando"/>
+			<item value="ExisteInstanciaDeClaseParaSesionComando"/>
+			<item value="localhost"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Direccion2"/>
+			<item value="Direccion1"/>
 			<item value=" = "/>
 			<item value="Valor"/>
 			<item value="Sesion"/>

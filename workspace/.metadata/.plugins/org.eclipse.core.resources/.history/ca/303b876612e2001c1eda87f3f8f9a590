@@ -1,0 +1,12 @@
+package persistidor.repositorios;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import persistidor.entidades.Primitivo;
+
+public interface RepositorioDePrimitivos extends JpaRepository<Primitivo, Long>
+{
+	@Query("SELECT TOP(1)u from User u where u.firstname like %?1")
+	List<User> findByFirstnameEndsWith(String firstname);
+}

@@ -1,0 +1,14 @@
+package persistidor.comandos;
+
+import persistidor.excepciones.NoExisteSesionException;
+
+public class CrearSesionComando
+{
+	public void Ejecutar(long sId, Object o)
+	{
+		if (!servicioDeSesiones.existeSesion(idSesion))
+		{
+			throw new NoExisteSesionException("No existe sesion de ID: " + idSesion);
+		}
+	}
+}

@@ -1,5 +1,10 @@
 package persistidor.servicios;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import persistidor.entidades.Sesion;
@@ -16,7 +21,7 @@ public class ServicioDeSesiones
 		return repositorioDeSesiones.findById(idSesion).orElse(null);
 	}
 
-	public void crearSesion(Sesion sesion)
+	public void insertarSesion(Sesion sesion)
 	{
 		repositorioDeSesiones.save(sesion);
 	}
@@ -25,11 +30,11 @@ public class ServicioDeSesiones
 	{
 		long idSesion = sesion.getId();
 		Sesion sesionDeLaBaseDeDatos = this.obtenerSesionPorId(idSesion);
-	}
+		
+		sesionDeLaBaseDeDatos.setObjetos(sesion.getObjetos());
+		sesionDeLaBaseDeDatos.actualizarUltimoAcceso();
 
-	public void eliminarSesion(long idSesion)
-	{
-		repositorioDeSesiones.deleteById(idSesion);
+		repositorioDeSesiones.save(sesionDeLaBaseDeDatos);
 	}
 	
 	public boolean existeSesion(long idSesion)

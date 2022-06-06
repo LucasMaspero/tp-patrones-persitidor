@@ -1,0 +1,18 @@
+package persistidor.comandos;
+
+import org.springframework.stereotype.Component;
+
+import persistidor.excepciones.NoExisteSesionException;
+
+@Component
+public class ExisteObjetoAsociadoASesionComando
+{
+	// Obtiene la clase del objeto o y chequea si existe alguna instancia de esa clase para la sesion de ID idSesion.
+	// Basicamente, esto da true siempre y cuando se haya persistido de forma directa algun objeto
+	// de clase clazz con ese ID de sesion.
+	public boolean Ejecutar(long sId, Object o) throws NoExisteSesionException
+	{
+		// TO DO
+		return true;
+	}
+}

@@ -149,3 +149,6 @@ repositories/http\:__www.apache.org_dist_geronimo_eclipse_updates/uri=http\://ww
 repositories/http\:__www.eclipse.org_modeling_updates/enabled=false
 repositories/http\:__www.eclipse.org_modeling_updates/isSystem=false
 repositories/http\:__www.eclipse.org_modeling_updates/uri=http\://www.eclipse.org/modeling/updates/
+repositories/https\:__javahexeditor.sourceforge.io_update/enabled=false
+repositories/https\:__javahexeditor.sourceforge.io_update/isSystem=false
+repositories/https\:__javahexeditor.sourceforge.io_update/uri=https\://javahexeditor.sourceforge.io/update

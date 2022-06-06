@@ -11,10 +11,9 @@ public class ServicioDeObjetos
 	@Autowired
 	private RepositorioDeObjetos repositorioDeObjetos;
 
-	public boolean crearObjeto(Objeto Objeto)
+	public void insertarObjeto(Objeto objeto)
 	{
-		// TODO
-		return false;
+		repositorioDeObjetos.save(objeto);
 	}
 
 	public void actualizarObjeto(Objeto Objeto)

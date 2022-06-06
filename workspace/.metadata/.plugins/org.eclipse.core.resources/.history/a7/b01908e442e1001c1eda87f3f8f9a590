@@ -1,0 +1,23 @@
+package persistidor.comandos;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import persistidor.servicios.ServicioDeSesiones;
+
+@Component
+public class ObtenerInstanciaDeClaseAsociadoASesionComando
+{
+	@Autowired
+	private ServicioDeSesiones servicioDeSesiones;
+	
+	@Autowired
+	private ExisteObjetoDeClaseAsociadoASesionComando existeObjetoDeClaseAsociadoASesionComando;
+	
+	public <T> T Ejecutar(long sId, Class<T> clazz)
+	{
+		existeObjetoDeClaseAsociadoASesionComando.Ejecutar(idSesion, claseDelObjeto)
+		// TO DO
+		return null;
+	}
+}

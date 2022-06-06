@@ -1,0 +1,17 @@
+package persistidor.servicios;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import persistidor.entidades.Primitivo;
+import persistidor.repositorios.RepositorioDeClases;
+import persistidor.repositorios.RepositorioDePrimitivos;
+
+public class ServicioDePrimitivos
+{
+	@Autowired
+	private RepositorioDePrimitivos repositorioDePrimitivos;
+	
+	public Primitivo ObtenerPrimitivoPorNombre(String nombrePrimitivo)
+	{
+		return repositorioDePrimitivos.obtenerPrimitivoPorNombre(nombrePrimitivo);
+	}
+}

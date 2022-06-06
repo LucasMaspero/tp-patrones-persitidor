@@ -1,0 +1,19 @@
+1654042505327	Rename type 'EliminarInstanciaDeLaClaseParaSesionComando'
+1654042575960	Rename type 'ExisteInstanciaDeClaseParaSesionComando'
+1654042597525	Rename type 'ExisteInstanciaComando'
+1654042856297	Rename type 'ExisteObjetoEnLaDbComando'
+1654043012402	Rename type 'ExisteInstanciaComando'
+1654043199098	Rename type 'ExisteInstanciaDeClaseComando'
+1654043359214	Rename type 'ExisteObjetoComando'
+1654043564149	Rename type 'ObtenerInstanciaDeClaseParaSesionComando'
+1654044343175	Rename type 'CrearObjetoEnLaDbComando'
+1654044378790	Rename type 'EliminarInstanciaComando'
+1654044559706	Rename type 'ObtenerInstanciaDeClaseAsociadoASesionComando'
+1654044568217	Delete element
+1654044635952	Delete element
+1654044939024	Delete element
+1654045589349	Rename type 'CrearSesionComando'
+1654046377392	Rename type 'CrearSesionSiNoExisteComando'
+1654130479864	Rename type 'CrearNuevaSesionComando'
+1654130849788	Rename type 'CrearSesionSiNoExisteComando'
+1654130922829	Rename type 'ObtenerTodasLasClasesInvolucradasDesdeObjetoComando'

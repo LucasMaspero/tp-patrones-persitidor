@@ -1,0 +1,17 @@
+package persistidor.comandos;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import persistidor.servicios.ServicioDeSesiones;
+
+@Component
+public class ObtenerTiempoTranscurridoDeSesionComando
+{
+	@Autowired
+	private ServicioDeSesiones servicioDeSesiones;
+	
+	public long Ejecutar(long idSesion)
+	{
+		var sesionAsociada = servicioDeSesiones.obtenerSesionPorId(idSesion);
+	}
+}

@@ -1,7 +1,0 @@
-package persistidor.anotaciones;
-
-import java.lang.annotation.Retention;
-
-public @interface Persistable 
-{
-}

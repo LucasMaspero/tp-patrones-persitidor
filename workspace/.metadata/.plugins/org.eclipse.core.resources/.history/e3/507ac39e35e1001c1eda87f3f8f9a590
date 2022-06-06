@@ -1,0 +1,6 @@
+package persistidor.excepciones;
+
+public class NoExisteSesionException
+{
+
+}

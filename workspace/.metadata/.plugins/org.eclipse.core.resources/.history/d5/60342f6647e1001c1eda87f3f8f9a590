@@ -1,0 +1,24 @@
+package persistidor.comandos;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import persistidor.entidades.Sesion;
+import persistidor.servicios.ServicioDeSesiones;
+
+public class CrearSesionSiNoExisteComando
+{
+	@Autowired
+	private ServicioDeSesiones servicioDeSesiones;
+	
+	public void Ejecutar(long idSesion, Object o)
+	{
+		if (servicioDeSesiones.existeSesion(idSesion))
+		{
+			return;
+		}
+		
+		Sesion nuevaSesion = new Sesion(idSesion);
+		
+		servicioDeSesiones.crearSesion(nuevaSesion);
+	}
+}

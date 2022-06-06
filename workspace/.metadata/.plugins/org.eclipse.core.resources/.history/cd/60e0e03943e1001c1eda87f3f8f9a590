@@ -1,0 +1,32 @@
+package persistidor.comandos;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import persistidor.excepciones.NoExisteSesionException;
+import persistidor.servicios.ServicioDeSesiones;
+
+@Component
+public class ObtenerInstanciaDeClaseAsociadoASesionComando
+{
+	@Autowired
+	private ServicioDeSesiones servicioDeSesiones;
+	
+	@Autowired
+	private ExisteObjetoDeClaseAsociadoASesionComando existeObjetoDeClaseAsociadoASesionComando;
+	
+	// Obtiene la instancia de tipo clazz para la sesion de ID idSesion.
+	// 	* Si la sesion NO existe, tira excepcion.
+	// 	* Si la sesion existe, pero NO tiene ninguna instancia del tipo clazz, devuelve null.
+	// 	* Si la sesion existe, y tiene ninguna instancia del tipo clazz, la devuelve.
+	public <T> T Ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
+	{
+		if (!existeObjetoDeClaseAsociadoASesionComando.Ejecutar(idSesion, clazz))
+		{
+			return null;
+		}
+		
+		// TO DO
+		return null;
+	}
+}

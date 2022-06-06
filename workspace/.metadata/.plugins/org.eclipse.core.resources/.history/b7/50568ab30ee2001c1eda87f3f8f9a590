@@ -1,0 +1,21 @@
+package persistidor.comandos;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+import org.springframework.stereotype.Component;
+import persistidor.entidades.Clase;
+import persistidor.entidades.Objeto;
+
+@Component
+public class ObtenerTodasLasClasesInvolucradasDeObjetoComando
+{
+	public ArrayList<Clase> Ejecutar(Objeto objeto)
+	{
+		Set<Clase> clasesInvolucradas = new HashSet<Clase>();
+		
+		clasesInvolucradas.add(objeto.getClase());
+		
+		return clasesInvolucradas;
+	}
+}

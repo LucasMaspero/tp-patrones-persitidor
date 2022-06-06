@@ -10,6 +10,10 @@ public class Persona
 	private Direccion laMejorDireccion;
 	private ArrayList<Direccion> direcciones;
 
+	public Persona()
+	{
+	}
+	
 	public Persona(String dni, String nombre, ArrayList<String> telefonos, Direccion laMejorDireccion, ArrayList<Direccion> direcciones)
 	{
 		this.dni = dni;
@@ -67,5 +71,11 @@ public class Persona
 	public void setDirecciones(ArrayList<Direccion> direcciones)
 	{
 		this.direcciones = direcciones;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Persona [dni="+dni+", nombre="+nombre+", telefonos="+telefonos+", laMejorDireccion="+laMejorDireccion+", direcciones="+direcciones+"]";
 	}
 }
