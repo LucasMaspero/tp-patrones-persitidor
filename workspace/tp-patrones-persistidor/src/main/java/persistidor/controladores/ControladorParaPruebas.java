@@ -1,5 +1,6 @@
 package persistidor.controladores;
 
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,7 @@ public class ControladorParaPruebas
 	@GetMapping("store/{id}")
     public ResponseEntity<?> insert(@PathVariable("id") Integer sId)
     {
-		Persona persona = new Persona();
-		Direccion direccion = new Direccion();
+		Persona persona = CrearPersonaEjemplo();
 		
 		boolean exists = persistentObject.store(sId, persona);
 		
@@ -51,11 +51,11 @@ public class ControladorParaPruebas
 			
 			return new ResponseEntity<Boolean>(exists, HttpStatus.OK);
 		}
-		catch(NoExisteSesionException ex)
+		catch (NoExisteSesionException ex)
 		{
 			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		catch(ClassNotFoundException ex)
+		catch (ClassNotFoundException ex)
 		{
 			return new ResponseEntity<String>("No existe clase de nombre; " + ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}
@@ -70,7 +70,7 @@ public class ControladorParaPruebas
 			
 			return new ResponseEntity<Long>(elapsedTime, HttpStatus.OK);
 		}
-		catch(NoExisteSesionException ex)
+		catch (NoExisteSesionException ex)
 		{
 			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}
@@ -78,6 +78,19 @@ public class ControladorParaPruebas
 	
 	private Persona CrearPersonaEjemplo()
 	{
+		Direccion laMejorDireccion = new Direccion("Cuenca", 1235, "C1245DQW", "CABA", "CABA", "Argentina");
+		Direccion direccion1 = new Direccion("Corrientes", 452, "B5514ABC", "Buenos Aires", "Buenos Aires", "Argentina");
+		Direccion direccion2 = new Direccion("Pedro Moran", 2345, "ABC123", "Buzios", "Rio de Janeiro", "Brasil");
 		
+		ArrayList<Direccion> direcciones = new ArrayList<Direccion>();
+		direcciones.add(direccion1);
+		direcciones.add(direccion2);
+		
+		ArrayList<String> telefonos = new ArrayList<String>();
+		telefonos.add("4444-2222");
+		telefonos.add("5555-3333");
+		telefonos.add("6666-4444");
+		
+		return new Persona("123", "Pepe", telefonos, laMejorDireccion, direcciones);
 	}
 }

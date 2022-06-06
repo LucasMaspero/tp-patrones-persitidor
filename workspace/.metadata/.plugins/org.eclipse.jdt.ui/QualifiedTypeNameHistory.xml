@@ -43,9 +43,7 @@
 <fullyQualifiedTypeName name="persistidor.entidades.Primitivo"/>
 <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Valor"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Clase"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
 <fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
 <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeSesiones"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

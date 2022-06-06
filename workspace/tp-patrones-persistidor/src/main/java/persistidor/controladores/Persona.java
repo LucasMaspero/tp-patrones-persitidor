@@ -10,10 +10,6 @@ public class Persona
 	private Direccion laMejorDireccion;
 	private ArrayList<Direccion> direcciones;
 
-	public Persona()
-	{
-	}
-	
 	public Persona(String dni, String nombre, ArrayList<String> telefonos, Direccion laMejorDireccion, ArrayList<Direccion> direcciones)
 	{
 		this.dni = dni;
