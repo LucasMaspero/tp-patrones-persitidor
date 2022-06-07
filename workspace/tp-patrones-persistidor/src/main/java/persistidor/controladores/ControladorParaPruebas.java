@@ -11,6 +11,7 @@ import persistidor.api.PersistentObject;
 import persistidor.entidades.Objeto;
 import persistidor.entidades.Sesion;
 import persistidor.excepciones.NoExisteSesionException;
+import persistidor.servicios.ServicioDeObjetos;
 import persistidor.servicios.ServicioDeSesiones;
 
 @RestController
@@ -21,6 +22,9 @@ public class ControladorParaPruebas
 	
 	@Autowired
 	private ServicioDeSesiones servicioDeSesiones;
+	
+	@Autowired
+	private ServicioDeObjetos servicioDeObjetos;
 	
 	@GetMapping("store/{id}")
     public ResponseEntity<?> insert(@PathVariable("id") Integer sId)
@@ -59,6 +63,18 @@ public class ControladorParaPruebas
 		{
 			return new ResponseEntity<String>("No existe clase de nombre; " + ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}
+    }
+	
+	@GetMapping("eliminar/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer sId)
+    {
+		Sesion sesion = servicioDeSesiones.obtenerSesionPorId(sId);
+		
+		Objeto objeto = sesion.getObjetos().get(0);
+		
+		servicioDeObjetos.eliminarObjeto(objeto);
+		
+		return new ResponseEntity<String>("", HttpStatus.OK);
     }
 	
 	@GetMapping("elapsedTime/{id}")

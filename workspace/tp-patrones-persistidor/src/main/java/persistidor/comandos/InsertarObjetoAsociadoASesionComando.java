@@ -1,5 +1,6 @@
 package persistidor.comandos;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import persistidor.entidades.Objeto;
@@ -16,9 +17,6 @@ public class InsertarObjetoAsociadoASesionComando
 	private CrearSesionSiNoExisteUObtenerSesionActualComando crearSesionSiNoExisteUObtenerSesionActualComando;
 	
 	@Autowired
-	private ActualizarUltimoAccesoDeSesionComando actualizarUltimoAccesoDeSesionComando;
-	
-	@Autowired
 	private CrearEntidadObjetoDesdeUnObjectComando crearEntidadObjetoDesdeUnObjectComando;
 	
 	public void Ejecutar(long idSesion, Object o)
@@ -27,8 +25,10 @@ public class InsertarObjetoAsociadoASesionComando
 		
 		Objeto objetoAInsertar = crearEntidadObjetoDesdeUnObjectComando.Ejecutar(o, sesionActual);
 		
-		//servicioDeObjetos.insertarObjeto(objetoAInsertar);
+		List<Objeto> objetosDeSesionActual = sesionActual.getObjetos();
+		objetosDeSesionActual.add(objetoAInsertar);
+		sesionActual.setObjetos(objetosDeSesionActual);
 		
-		actualizarUltimoAccesoDeSesionComando.Ejecutar(idSesion);
+		servicioDeSesiones.actualizarSesion(sesionActual);
 	}
 }

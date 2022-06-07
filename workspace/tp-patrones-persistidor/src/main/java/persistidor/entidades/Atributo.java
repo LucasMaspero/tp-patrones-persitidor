@@ -27,12 +27,12 @@ public class Atributo
 	private Boolean esColeccion;
 	
 	// A que clase pertenece el atributo
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_clase")
 	private Clase clasePadre;
 	
 	// Si el atributo es NO primitivo, de que tipo clase es
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name = "id_tipo_clase")
 	private Clase tipoClase;
 	

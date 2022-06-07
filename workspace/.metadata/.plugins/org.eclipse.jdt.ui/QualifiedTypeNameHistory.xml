@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
-<fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
-<fullyQualifiedTypeName name="org.hibernate.mapping.List"/>
 <fullyQualifiedTypeName name="entidades.Objeto"/>
 <fullyQualifiedTypeName name="entidades.Sesion"/>
 <fullyQualifiedTypeName name="org.springframework.data.repository.CrudRepository"/>
@@ -53,11 +50,14 @@
 <fullyQualifiedTypeName name="javax.persistence.GenerationType"/>
 <fullyQualifiedTypeName name="org.hibernate.annotations.NotFoundAction"/>
 <fullyQualifiedTypeName name="javax.persistence.FetchType"/>
-<fullyQualifiedTypeName name="persistidor.servicios.ServicioDeObjetos"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeSesiones"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
-<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="antlr.collections.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="persistidor.comandos.ActualizarObjetoAsociadoASesionComando"/>
+<fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeObjetos"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
+<fullyQualifiedTypeName name="persistidor.servicios.ServicioDeObjetos"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
 </qualifiedTypeNameHistroy>

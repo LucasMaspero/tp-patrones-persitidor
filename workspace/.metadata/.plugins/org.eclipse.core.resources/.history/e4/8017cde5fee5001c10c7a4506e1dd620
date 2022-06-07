@@ -1,0 +1,18 @@
+package persistidor.servicios;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import persistidor.entidades.Sesion;
+import persistidor.repositorios.RepositorioDeSesiones;
+
+@Service
+public class ServicioDeObjetos
+{
+	Autowired
+	private RepositorioDeObjetos repositorioDeObjetos;
+	
+	public void eliminarObjeto(Objeto objeto)
+	{
+		
+	}
+}

@@ -13,7 +13,6 @@ import persistidor.entidades.Sesion;
 import persistidor.entidades.Valor;
 import persistidor.servicios.ServicioDePrimitivos;
 
-// La hacen mis compañeros
 @Component
 public class CrearEntidadObjetoDesdeUnObjectComando
 {

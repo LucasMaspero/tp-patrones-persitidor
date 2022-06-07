@@ -2,8 +2,8 @@ package persistidor.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import persistidor.comandos.ActualizarObjetoEnLaDbComando;
 import persistidor.comandos.InsertarObjetoAsociadoASesionComando;
+import persistidor.comandos.ActualizarObjetoAsociadoASesionComando;
 import persistidor.comandos.EliminarObjetoDeClaseAsociadoASesionComando;
 import persistidor.comandos.ExisteObjetoDeClaseAsociadoASesionComando;
 import persistidor.comandos.ObtenerObjetoDeClaseAsociadoASesionComando;
@@ -17,7 +17,7 @@ public class PersistentObject
 	private InsertarObjetoAsociadoASesionComando insertarObjetoAsociadoASesionComando;
 	
 	@Autowired
-	private ActualizarObjetoEnLaDbComando actualizarObjetoEnLaDbComando;
+	private ActualizarObjetoAsociadoASesionComando actualizarObjetoAsociadoASesionComando;
 	
 	@Autowired
 	private ObtenerObjetoDeClaseAsociadoASesionComando obtenerObjetoDeClaseAsociadoASesionComando;
@@ -44,13 +44,13 @@ public class PersistentObject
 		{
 			if (existeObjetoDeClaseAsociadoASesionComando.Ejecutar(sId, claseDelObjeto))
 			{
-				actualizarObjetoEnLaDbComando.Ejecutar(sId, o);
+				actualizarObjetoAsociadoASesionComando.Ejecutar(sId, o);
 				return true;
 			}
 			
 			insertarObjetoAsociadoASesionComando.Ejecutar(sId, o);
 		}
-		catch(NoExisteSesionException ex)
+		catch (NoExisteSesionException ex)
 		{
 			insertarObjetoAsociadoASesionComando.Ejecutar(sId, o);
 		}

@@ -3,7 +3,6 @@ package persistidor.comandos;
 import org.springframework.stereotype.Component;
 import persistidor.entidades.Objeto;
 
-//La hacen mis compañeros
 @Component
 public class CrearObjectDesdeEntidadObjetoComando
 {

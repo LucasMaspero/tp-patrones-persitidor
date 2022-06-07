@@ -21,7 +21,7 @@ public class Clase
 	
 	private String nombre;
 	
-	@OneToMany(mappedBy = "clasePadre", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "clasePadre", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Atributo> atributos;
 	
 	@OneToMany()

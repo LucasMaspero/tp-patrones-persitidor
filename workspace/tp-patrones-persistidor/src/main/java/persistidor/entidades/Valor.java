@@ -21,17 +21,17 @@ public class Valor
 	private long id;
 	
 	// A que objeto pertenece este valor de atributo
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_objeto")
 	private Objeto objetoPadre;
 	
 	// Si el valor es un objeto, que objeto es
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="id_objeto_valor")
 	private Objeto valorObjeto;
 
 	// Valor de que atributo es
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_atributo")
 	private Atributo atributo;
 	
