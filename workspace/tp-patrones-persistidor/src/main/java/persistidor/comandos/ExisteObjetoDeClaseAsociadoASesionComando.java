@@ -18,7 +18,7 @@ public class ExisteObjetoDeClaseAsociadoASesionComando
 	// Chequea si existe alguna instancia de la clase clazz para la sesion de ID idSesion.
 	// (Basicamente, esto da true siempre y cuando se haya persistido de forma directa algun objeto
 	// de clase clazz con ese ID de sesion).
-	public <T> boolean Ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
+	public <T> boolean ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
 	{
 		if (!servicioDeSesiones.existeSesion(idSesion))
 		{

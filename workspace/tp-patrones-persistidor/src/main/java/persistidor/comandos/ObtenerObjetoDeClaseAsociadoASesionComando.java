@@ -25,9 +25,9 @@ public class ObtenerObjetoDeClaseAsociadoASesionComando
 	// 	* Si la sesion NO existe, tira excepcion.
 	// 	* Si la sesion existe, pero NO tiene ninguna instancia del tipo clazz, devuelve null.
 	// 	* Si la sesion existe, y tiene ninguna instancia del tipo clazz, la devuelve.
-	public <T> T Ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
+	public <T> T ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
 	{
-		if (!existeObjetoDeClaseAsociadoASesionComando.Ejecutar(idSesion, clazz))
+		if (!existeObjetoDeClaseAsociadoASesionComando.ejecutar(idSesion, clazz))
 		{
 			// La sesion NO existe
 			return null;
@@ -47,7 +47,7 @@ public class ObtenerObjetoDeClaseAsociadoASesionComando
 			if (nombreDeLaClaseDelObjeto.equals(nombreDeLaClaseABuscarSiExiste))
             {
 				// La sesion existe, y tiene ninguna instancia del tipo clazz
-                return crearObjectDesdeEntidadObjetoComando.Ejecutar(objetoDeSesion);
+                return crearObjectDesdeEntidadObjetoComando.ejecutar(objetoDeSesion);
             }
         }
 		

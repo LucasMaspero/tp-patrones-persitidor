@@ -10,11 +10,11 @@ public class ActualizarObjetoAsociadoASesionComando
 	@Autowired
 	private EliminarObjetoDeClaseAsociadoASesionComando eliminarObjetoDeClaseAsociadoASesionComando;
 	
-	public void Ejecutar(long idSesion, Object o) throws NoExisteSesionException
+	public void ejecutar(long idSesion, Object o) throws NoExisteSesionException
 	{
 		Class<?> claseDelObjeto = o.getClass();
 		
-		eliminarObjetoDeClaseAsociadoASesionComando.Ejecutar(idSesion, claseDelObjeto);
+		eliminarObjetoDeClaseAsociadoASesionComando.ejecutar(idSesion, claseDelObjeto);
 		
 		// TO DO
 	}

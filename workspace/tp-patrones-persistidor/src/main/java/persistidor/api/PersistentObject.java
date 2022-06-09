@@ -42,17 +42,17 @@ public class PersistentObject
 		
 		try
 		{
-			if (existeObjetoDeClaseAsociadoASesionComando.Ejecutar(sId, claseDelObjeto))
+			if (existeObjetoDeClaseAsociadoASesionComando.ejecutar(sId, claseDelObjeto))
 			{
-				actualizarObjetoAsociadoASesionComando.Ejecutar(sId, o);
+				actualizarObjetoAsociadoASesionComando.ejecutar(sId, o);
 				return true;
 			}
 			
-			insertarObjetoAsociadoASesionComando.Ejecutar(sId, o);
+			insertarObjetoAsociadoASesionComando.ejecutar(sId, o);
 		}
 		catch (NoExisteSesionException ex)
 		{
-			insertarObjetoAsociadoASesionComando.Ejecutar(sId, o);
+			insertarObjetoAsociadoASesionComando.ejecutar(sId, o);
 		}
 		
 		return false;
@@ -61,14 +61,14 @@ public class PersistentObject
 	// Devuelve la instancia del objeto o asociada a la clave sId.
 	public <T> T load(long sId, Class<T> clazz) throws NoExisteSesionException
 	{
-		return obtenerObjetoDeClaseAsociadoASesionComando.Ejecutar(sId, clazz);
+		return obtenerObjetoDeClaseAsociadoASesionComando.ejecutar(sId, clazz);
 	}
 	
 	// Retorna true o false según exista o un una instancia
 	// de clazz (aunque sea null) asociada a la clave sId.
 	public <T> boolean exists(long sId, Class<T> clazz) throws NoExisteSesionException
 	{
-		return existeObjetoDeClaseAsociadoASesionComando.Ejecutar(sId, clazz);
+		return existeObjetoDeClaseAsociadoASesionComando.ejecutar(sId, clazz);
 	}
 	
 	// Retorna (en milisegundos) el tiempo transcurrido 
@@ -76,13 +76,13 @@ public class PersistentObject
 	// sin considerar las llamadas a este metodo ni a exists.
 	public long elapsedTime(long sId) throws NoExisteSesionException
 	{
-		return obtenerTiempoTranscurridoDeSesionComando.Ejecutar(sId);
+		return obtenerTiempoTranscurridoDeSesionComando.ejecutar(sId);
 	}
 	
 	// retorna y elimina la instancia de clazz vinculada a la
 	// clave sId, o retorna null si no existe dicha instancia
 	public <T> T delete(long sId, Class<T> clazz) throws NoExisteSesionException
 	{
-		return eliminarObjetoDeClaseAsociadoASesionComando.Ejecutar(sId, clazz);
+		return eliminarObjetoDeClaseAsociadoASesionComando.ejecutar(sId, clazz);
 	}
 }

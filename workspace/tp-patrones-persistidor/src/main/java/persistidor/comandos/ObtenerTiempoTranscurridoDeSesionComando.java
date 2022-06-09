@@ -13,7 +13,7 @@ public class ObtenerTiempoTranscurridoDeSesionComando
 	@Autowired
 	private ServicioDeSesiones servicioDeSesiones;
 	
-	public long Ejecutar(long idSesion) throws NoExisteSesionException
+	public long ejecutar(long idSesion) throws NoExisteSesionException
 	{
 		if (!servicioDeSesiones.existeSesion(idSesion))
 		{

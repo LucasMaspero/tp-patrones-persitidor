@@ -8,7 +8,7 @@ public class CrearObjectDesdeEntidadObjetoComando
 {
 	// Crea un objeto de tipo T a partir de una entidad objeto
 	// TIRA StructureChangedException SI CAMBIO ALGO !!
-	public <T> T Ejecutar(Objeto o)
+	public <T> T ejecutar(Objeto o)
 	{
 		// TO DO
 		return null;

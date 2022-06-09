@@ -33,7 +33,7 @@ public class Objeto
 	private Clase clase;
 	
 	// Los valores para los atributos de este objeto
-	@OneToMany(mappedBy = "objetoPadre", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(mappedBy = "objetoPadre", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
 	private List<Valor> valores;
 	
 	public Objeto()
@@ -72,5 +72,36 @@ public class Objeto
 	public List<Valor> getValores()
 	{
 		return valores;
+	}
+
+	public long getId()
+	{
+		return id;
+	}
+	
+	public void limpiarRelaciones()
+	{
+		this.sesion = null;
+		this.valores.clear();
+	}
+
+	@Override
+	public int hashCode()
+	{
+		final int prime=31;
+		int result=1;
+		result=prime*result+(int)(id^(id>>>32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(this==obj) return true;
+		if(obj==null) return false;
+		if(getClass()!=obj.getClass()) return false;
+		Objeto other=(Objeto)obj;
+		if(id!=other.id) return false;
+		return true;
 	}
 }

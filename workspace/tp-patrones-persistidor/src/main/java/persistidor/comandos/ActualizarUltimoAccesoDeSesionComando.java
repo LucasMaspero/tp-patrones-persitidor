@@ -11,7 +11,7 @@ public class ActualizarUltimoAccesoDeSesionComando
 	@Autowired
 	private ServicioDeSesiones servicioDeSesiones;
 	
-	public void Ejecutar(long idSesion)
+	public void ejecutar(long idSesion)
 	{
 		Sesion sesionExistente = servicioDeSesiones.obtenerSesionPorId(idSesion);
 		servicioDeSesiones.actualizarSesion(sesionExistente);

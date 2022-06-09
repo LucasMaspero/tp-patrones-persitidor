@@ -19,11 +19,11 @@ public class InsertarObjetoAsociadoASesionComando
 	@Autowired
 	private CrearEntidadObjetoDesdeUnObjectComando crearEntidadObjetoDesdeUnObjectComando;
 	
-	public void Ejecutar(long idSesion, Object o)
+	public void ejecutar(long idSesion, Object o)
 	{
-		Sesion sesionActual = crearSesionSiNoExisteUObtenerSesionActualComando.Ejecutar(idSesion);
+		Sesion sesionActual = crearSesionSiNoExisteUObtenerSesionActualComando.ejecutar(idSesion);
 		
-		Objeto objetoAInsertar = crearEntidadObjetoDesdeUnObjectComando.Ejecutar(o, sesionActual);
+		Objeto objetoAInsertar = crearEntidadObjetoDesdeUnObjectComando.ejecutar(o, sesionActual);
 		
 		List<Objeto> objetosDeSesionActual = sesionActual.getObjetos();
 		objetosDeSesionActual.add(objetoAInsertar);

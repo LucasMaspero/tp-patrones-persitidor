@@ -11,7 +11,7 @@ public class CrearSesionSiNoExisteUObtenerSesionActualComando
 	@Autowired
 	private ServicioDeSesiones servicioDeSesiones;
 	
-	public Sesion Ejecutar(long idSesion)
+	public Sesion ejecutar(long idSesion)
 	{
 		if (!servicioDeSesiones.existeSesion(idSesion))
 		{

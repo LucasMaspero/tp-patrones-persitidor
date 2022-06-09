@@ -25,7 +25,7 @@ public class CrearEntidadObjetoDesdeUnObjectComando
 	// Si la clase del objeto o (o la propiedad) tiene la anottation NotPersistable,
 	// asegurarse de NO cargarla en el "Objeto".
 	// No setear IDs nunca (de ninguna entidad, eso se maneja solo en los repos).
-	public Objeto Ejecutar(Object o, Sesion sesion)
+	public Objeto ejecutar(Object o, Sesion sesion)
 	{
 		Primitivo primitivoString = servicioDePrimitivos.ObtenerPrimitivoPorNombre("String");
 		Primitivo primitivoInt = servicioDePrimitivos.ObtenerPrimitivoPorNombre("int");

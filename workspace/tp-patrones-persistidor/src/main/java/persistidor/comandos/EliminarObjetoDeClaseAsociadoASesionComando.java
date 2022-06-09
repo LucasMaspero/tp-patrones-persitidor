@@ -10,9 +10,9 @@ public class EliminarObjetoDeClaseAsociadoASesionComando
 	@Autowired
 	private ExisteObjetoDeClaseAsociadoASesionComando existeObjetoDeClaseAsociadoASesionComando;
 	
-	public <T> T Ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
+	public <T> T ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
 	{
-		if (!existeObjetoDeClaseAsociadoASesionComando.Ejecutar(idSesion, clazz))
+		if (!existeObjetoDeClaseAsociadoASesionComando.ejecutar(idSesion, clazz))
 		{
 			return null;
 		}

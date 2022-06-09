@@ -11,6 +11,7 @@ import persistidor.api.PersistentObject;
 import persistidor.entidades.Objeto;
 import persistidor.entidades.Sesion;
 import persistidor.excepciones.NoExisteSesionException;
+import persistidor.servicios.ServicioDeClases;
 import persistidor.servicios.ServicioDeObjetos;
 import persistidor.servicios.ServicioDeSesiones;
 
@@ -25,6 +26,9 @@ public class ControladorParaPruebas
 	
 	@Autowired
 	private ServicioDeObjetos servicioDeObjetos;
+	
+	@Autowired
+	private ServicioDeClases servicioDeClases;
 	
 	@GetMapping("store/{id}")
     public ResponseEntity<?> insert(@PathVariable("id") Integer sId)
@@ -68,11 +72,12 @@ public class ControladorParaPruebas
 	@GetMapping("eliminar/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer sId)
     {
-		Sesion sesion = servicioDeSesiones.obtenerSesionPorId(sId);
+		//Sesion sesion = servicioDeSesiones.obtenerSesionPorId(sId);
 		
-		Objeto objeto = sesion.getObjetos().get(0);
+		//Objeto objeto = sesion.getObjetos().get(0);
 		
-		servicioDeObjetos.eliminarObjeto(objeto);
+		servicioDeObjetos.eliminarObjetoPorId(1);
+		servicioDeClases.eliminarClasePorId(1);
 		
 		return new ResponseEntity<String>("", HttpStatus.OK);
     }
