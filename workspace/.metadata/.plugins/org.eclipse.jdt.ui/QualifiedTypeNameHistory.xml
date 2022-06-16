@@ -41,9 +41,7 @@
 <fullyQualifiedTypeName name="antlr.collections.List"/>
 <fullyQualifiedTypeName name="persistidor.comandos.ActualizarObjetoAsociadoASesionComando"/>
 <fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeObjetos"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeObjetos"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Clase"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Atributo"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="persistidor.comandos.IValidarTipoDeObjectComando"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
 </qualifiedTypeNameHistroy>

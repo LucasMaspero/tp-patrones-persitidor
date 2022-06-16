@@ -68,4 +68,9 @@ public class Sesion
 	{
 		this.objetos = objetos;
 	}
+	
+	public void eliminarObjeto(Objeto objeto)
+	{
+		this.objetos.remove(objeto);
+	}
 }

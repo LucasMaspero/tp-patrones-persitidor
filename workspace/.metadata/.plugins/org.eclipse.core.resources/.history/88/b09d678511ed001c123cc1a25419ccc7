@@ -1,0 +1,9 @@
+package persistidor.repositorios;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import persistidor.entidades.Valor;
+
+public interface IRepositorioDeValores extends JpaRepository<Valor, Long>
+{
+}

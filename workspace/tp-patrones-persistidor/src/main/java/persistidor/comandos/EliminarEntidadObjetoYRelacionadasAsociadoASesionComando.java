@@ -29,10 +29,9 @@ public class EliminarEntidadObjetoYRelacionadasAsociadoASesionComando implements
 		
 		if (entidadObjetoAEliminar == null) return;
 		
-		long idObjetoAEliminar = entidadObjetoAEliminar.getId();
 		long idClaseAEliminar = entidadObjetoAEliminar.getClase().getId();
 		
-		servicioDeObjetos.eliminarObjetoPorId(idObjetoAEliminar);
+		servicioDeObjetos.eliminarObjeto(entidadObjetoAEliminar, idSesion);
 		servicioDeClases.eliminarClasePorId(idClaseAEliminar);
 		servicioDeSesiones.actualizarUltimoAcceso(idSesion);
 	}

@@ -1,0 +1,28 @@
+package persistidor.comandos;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import persistidor.entidades.Objeto;
+import persistidor.excepciones.NoExisteSesionException;
+import persistidor.excepciones.StructureChangedException;
+
+@Component
+public class ObtenerObjectAsociadoASesionComando implements IObtenerObjectAsociadoASesionComando
+{
+	@Autowired
+	private IObtenerEntidadObjetoAsociadoASesionComando obtenerEntidadObjetoAsociadoASesionComando;
+	
+	@Autowired
+	private ICrearObjectDesdeEntidadObjetoComando crearObjectDesdeEntidadObjetoComando;
+	
+	public <T> T ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException, StructureChangedException
+	{
+		Objeto entidadObjeto = obtenerEntidadObjetoAsociadoASesionComando.ejecutar(idSesion, clazz);
+		
+		if (entidadObjeto == null) return null;
+		
+		T object = crearObjectDesdeEntidadObjetoComando.ejecutar(entidadObjeto);
+		
+		return object;
+	}
+}

@@ -1,12 +1,12 @@
 package persistidor.servicios;
 
+import persistidor.entidades.Objeto;
+
 public interface IServicioDeObjetos
 {
 	/**
-     * Elimina un objeto por ID y sus valores asociados.
-     * @param idObjeto ID del objeto a eliminar.
-     * Devuelve true si pudo eliminar el objeto y sus valores asociados
-     * o false si NO pudo eliminar el objeto y sus valores asociados.
+     * Elimina un objeto y sus valores asociados.
+     * @param Objeto objeto a eliminar.
     **/
-	boolean eliminarObjetoPorId(long idObjeto);
+	void eliminarObjeto(Objeto objeto, long idSesion);
 }
