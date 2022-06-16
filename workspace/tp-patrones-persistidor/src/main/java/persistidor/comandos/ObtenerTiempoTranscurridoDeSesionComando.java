@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import persistidor.entidades.Sesion;
 import persistidor.excepciones.NoExisteSesionException;
-import persistidor.servicios.ServicioDeSesiones;
+import persistidor.servicios.IServicioDeSesiones;
 
 @Component
-public class ObtenerTiempoTranscurridoDeSesionComando
+public class ObtenerTiempoTranscurridoDeSesionComando implements IObtenerTiempoTranscurridoDeSesionComando
 {
 	@Autowired
-	private ServicioDeSesiones servicioDeSesiones;
+	private IServicioDeSesiones servicioDeSesiones;
 	
 	public long ejecutar(long idSesion) throws NoExisteSesionException
 	{

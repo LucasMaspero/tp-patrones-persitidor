@@ -1,0 +1,105 @@
+package persistidor.api;
+
+import java.util.Collection;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import persistidor.comandos.IActualizarEntidadObjetoAsociadaASesionComando;
+import persistidor.comandos.IEliminarEntidadObjetoYRelacionadasAsociadoASesionComando;
+import persistidor.comandos.IExisteEntidadObjetoAsociadoASesionComando;
+import persistidor.comandos.IInsertarEntidadObjetoAsociadaASesionComando;
+import persistidor.comandos.IObtenerObjectAsociadoASesionComando;
+import persistidor.comandos.IObtenerTiempoTranscurridoDeSesionComando;
+import persistidor.excepciones.NoExisteSesionException;
+import persistidor.excepciones.StructureChangedException;
+import persistidor.excepciones.TipoOValorInvalidoException;
+
+@Component
+public class PersistentObject implements IPersistentObject
+{
+	@Autowired
+	private IInsertarEntidadObjetoAsociadaASesionComando insertarEntidadObjetoAsociadaASesionComando;
+	
+	@Autowired
+	private IActualizarEntidadObjetoAsociadaASesionComando actualizarEntidadObjetoAsociadaASesionComando;
+	
+	@Autowired
+	private IObtenerObjectAsociadoASesionComando obtenerObjectAsociadoASesionComando;
+	
+	@Autowired
+	private IExisteEntidadObjetoAsociadoASesionComando existeEntidadObjetoAsociadoASesionComando;
+	
+	@Autowired
+	private IObtenerTiempoTranscurridoDeSesionComando obtenerTiempoTranscurridoDeSesionComando;
+	
+	@Autowired
+	private IEliminarEntidadObjetoYRelacionadasAsociadoASesionComando eliminarEntidadObjetoYRelacionadasAsociadoASesionComando;
+	
+	public boolean store(long sId, Object o) throws TipoOValorInvalidoException
+	{
+		if (o == null)
+		{
+			throw new TipoOValorInvalidoException("PeristentObject NO guarda valores NULL");
+		}
+		
+		Class<?> claseDelObjeto = o.getClass();
+		
+		System.out.println("Es collecion?: " + Collection.class.isAssignableFrom(claseDelObjeto));
+		System.out.println("Es diccionario?: " + Map.class.isAssignableFrom(claseDelObjeto));
+		System.out.println("Es collecion?: " + Collection.class.isAssignableFrom(claseDelObjeto));
+		System.out.println("Es collecion?: " + Collection.class.isAssignableFrom(claseDelObjeto));
+		System.out.println("Es collecion?: " + Collection.class.isAssignableFrom(claseDelObjeto));
+		System.out.println("Es collecion?: " + Collection.class.isAssignableFrom(claseDelObjeto));
+		
+		if (Collection.class.isAssignableFrom(claseDelObjeto) || 
+			Map.class.isAssignableFrom(claseDelObjeto) || 
+			claseDelObjeto.isArray() || 
+			claseDelObjeto.isPrimitive() || 
+			claseDelObjeto.isEnum() || 
+			claseDelObjeto.isInterface())
+		{
+			throw new TipoOValorInvalidoException("PeristentObject NO guarda objects de tipo " + claseDelObjeto.getTypeName());
+		}
+		
+		try
+		{
+			if (existeEntidadObjetoAsociadoASesionComando.ejecutar(sId, claseDelObjeto))
+			{
+				actualizarEntidadObjetoAsociadaASesionComando.ejecutar(sId, o);
+				return true;
+			}
+			
+			insertarEntidadObjetoAsociadaASesionComando.ejecutar(sId, o);
+		}
+		catch (NoExisteSesionException ex)
+		{
+			insertarEntidadObjetoAsociadaASesionComando.ejecutar(sId, o);
+		}
+		
+		return false;
+	}
+	
+	public <T> T load(long sId, Class<T> clazz) throws NoExisteSesionException, StructureChangedException
+	{
+		return obtenerObjectAsociadoASesionComando.ejecutar(sId, clazz);
+	}
+	
+	public <T> boolean exists(long sId, Class<T> clazz) throws NoExisteSesionException
+	{
+		return existeEntidadObjetoAsociadoASesionComando.ejecutar(sId, clazz);
+	}
+	
+	public long elapsedTime(long sId) throws NoExisteSesionException
+	{
+		return obtenerTiempoTranscurridoDeSesionComando.ejecutar(sId);
+	}
+	
+	public <T> T delete(long sId, Class<T> clazz) throws NoExisteSesionException, StructureChangedException
+	{
+		T objectAsociadoASesion = obtenerObjectAsociadoASesionComando.ejecutar(sId, clazz);
+		
+		eliminarEntidadObjetoYRelacionadasAsociadoASesionComando.ejecutar(sId, clazz);
+		
+		return objectAsociadoASesion;
+	}
+}

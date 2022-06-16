@@ -1,0 +1,12 @@
+package persistidor.servicios;
+
+public interface IServicioDeClases
+{
+	/**
+    * Elimina una clase por ID y sus atributos asociados
+    * @param newName This Student's new name.  
+    *                Should include both first
+    *                and last name.
+    */
+	boolean eliminarClasePorId(long idClase);
+}

@@ -1,0 +1,10 @@
+package persistidor.excepciones;
+
+@SuppressWarnings("serial")
+public class NoExisteClaseException extends Exception
+{
+	public NoExisteClaseException(String mensajeDeError)
+	{
+		super(mensajeDeError);
+	}
+}

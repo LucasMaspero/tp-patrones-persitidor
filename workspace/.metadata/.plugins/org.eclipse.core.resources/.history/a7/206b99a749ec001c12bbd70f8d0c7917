@@ -1,0 +1,22 @@
+package persistidor.comandos;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import persistidor.entidades.Clase;
+import persistidor.entidades.Objeto;
+import persistidor.entidades.Sesion;
+import persistidor.excepciones.NoExisteSesionException;
+import persistidor.servicios.ServicioDeSesiones;
+
+@Component
+public class ExisteObjetoDeClaseAsociadoASesionComando implements IExisteObjetoDeClaseAsociadoASesionComando
+{
+	@Autowired
+	private IObtenerObjetoDeClaseAsociadoASesionComando obtenerObjetoDeClaseAsociadoASesionComando;
+	
+	public <T> boolean ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
+	{
+		
+	}
+}

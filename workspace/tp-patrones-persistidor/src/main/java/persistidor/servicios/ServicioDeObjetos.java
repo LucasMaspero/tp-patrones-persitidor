@@ -3,34 +3,34 @@ package persistidor.servicios;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import persistidor.comandos.ObtenerObjetosYValoresAsociadosAObjetoComando;
+import persistidor.comandos.IObtenerEntidadesObjetoYEntidadesValorAsociadosAEntidadObjetoComando;
 import persistidor.entidades.Objeto;
 import persistidor.entidades.Valor;
-import persistidor.repositorios.RepositorioDeObjetos;
-import persistidor.repositorios.RepositorioDeValores;
+import persistidor.repositorios.IRepositorioDeObjetos;
+import persistidor.repositorios.IRepositorioDeValores;
 
 @Service
-public class ServicioDeObjetos
+public class ServicioDeObjetos implements IServicioDeObjetos
 {
 	@Autowired
-	private RepositorioDeObjetos repositorioDeObjetos;
+	private IRepositorioDeObjetos repositorioDeObjetos;
 	
 	@Autowired
-	private RepositorioDeValores repositorioDeValores;
+	private IRepositorioDeValores repositorioDeValores;
 	
 	@Autowired
-	private ObtenerObjetosYValoresAsociadosAObjetoComando obtenerObjetosYValoresAsociadosAObjetoComando;
+	private IObtenerEntidadesObjetoYEntidadesValorAsociadosAEntidadObjetoComando obtenerEntidadesObjetoYEntidadesValorAsociadosAEntidadObjetoComando;
 	
-	public void eliminarObjetoPorId(long idObjeto)
+	public boolean eliminarObjetoPorId(long idObjeto)
 	{
 		Objeto objetoPadre = repositorioDeObjetos.findById(idObjeto).orElse(null);
 		
-		if (objetoPadre == null) return;
+		if (objetoPadre == null) return false;
 		
-		obtenerObjetosYValoresAsociadosAObjetoComando.ejecutar(objetoPadre);
+		obtenerEntidadesObjetoYEntidadesValorAsociadosAEntidadObjetoComando.ejecutar(objetoPadre);
 		
-		List<Objeto> objetosAEliminar = obtenerObjetosYValoresAsociadosAObjetoComando.getObjetosAsociados();
-		List<Valor> valoresAEliminar = obtenerObjetosYValoresAsociadosAObjetoComando.getValoresAsociados();
+		List<Objeto> objetosAEliminar = obtenerEntidadesObjetoYEntidadesValorAsociadosAEntidadObjetoComando.getEntidadesObjetoAsociadas();
+		List<Valor> valoresAEliminar = obtenerEntidadesObjetoYEntidadesValorAsociadosAEntidadObjetoComando.getEntidadesValorAsociadas();
 		
 		for (Valor valor : valoresAEliminar)
 		{
@@ -47,5 +47,7 @@ public class ServicioDeObjetos
 			repositorioDeObjetos.save(objeto);
 			repositorioDeObjetos.deleteById(objeto.getId());
 		}
+		
+		return true;
 	}
 }

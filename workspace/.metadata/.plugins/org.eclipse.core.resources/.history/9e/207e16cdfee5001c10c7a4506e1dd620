@@ -1,9 +1,0 @@
-package persistidor.servicios;
-
-public class ServicioDeObjetos
-{
-	public void eliminarObjeto(Objeto objeto)
-	{
-		
-	}
-}

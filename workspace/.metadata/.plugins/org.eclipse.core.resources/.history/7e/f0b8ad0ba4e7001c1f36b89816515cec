@@ -1,0 +1,26 @@
+package persistidor.comandos;
+
+import java.util.HashSet;
+
+import persistidor.entidades.Atributo;
+import persistidor.entidades.Clase;
+
+public class ObtenerClasesYAtributosAsociadosAClaseComando
+{
+	public void Ejecutar(Clase clase, HashSet<Clase> clasesAEliminar, HashSet<Atributo> atributosAEliminar)
+	{
+		clasesAEliminar.add(clase);
+
+		for (Atributo atributo : clase.getAtributos())
+		{
+			atributosAEliminar.add(atributo);
+			
+			Clase claseTipo = atributo.getTipoClase();
+			
+			if (claseTipo != null)
+			{
+				clasesYAtributosAEliminar(claseTipo, clasesAEliminar, atributosAEliminar);
+			}
+		}
+	}
+}

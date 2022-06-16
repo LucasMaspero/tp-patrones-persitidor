@@ -1,0 +1,7 @@
+package persistidor.excepciones;
+
+@SuppressWarnings("serial")
+public class StructureChangedException extends Exception
+{
+
+}

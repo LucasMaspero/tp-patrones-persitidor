@@ -1,0 +1,11 @@
+package persistidor.comandos;
+
+public interface IInsertarEntidadObjetoAsociadaASesionComando
+{
+	/**
+	 * Inserta un nuevo objeto en la DB asociado a una sesion.
+	 * 
+	 * @param idClase ID de la clase a eliminar.
+	**/
+	void ejecutar(long idSesion, Object o);
+}

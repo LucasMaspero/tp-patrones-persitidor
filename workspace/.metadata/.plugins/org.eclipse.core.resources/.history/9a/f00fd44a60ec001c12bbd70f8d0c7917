@@ -1,0 +1,10 @@
+package persistidor.comandos;
+
+import persistidor.entidades.Clase;
+
+public interface IObtenerEntidadesClaseYEntidadesAtributoAsociadosAEntidadClaseComando
+{
+	void ejecutar(Clase clase);
+	
+	
+}

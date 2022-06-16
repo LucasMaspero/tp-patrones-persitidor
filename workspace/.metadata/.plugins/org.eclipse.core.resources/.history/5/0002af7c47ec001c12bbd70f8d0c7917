@@ -1,0 +1,6 @@
+package persistidor.servicios;
+
+public interface IServicioDeClases
+{
+
+}

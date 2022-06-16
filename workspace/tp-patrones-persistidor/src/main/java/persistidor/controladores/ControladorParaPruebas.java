@@ -1,61 +1,96 @@
 package persistidor.controladores;
 
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import persistidor.api.PersistentObject;
-import persistidor.entidades.Objeto;
-import persistidor.entidades.Sesion;
+import persistidor.api.IPersistentObject;
 import persistidor.excepciones.NoExisteSesionException;
-import persistidor.servicios.ServicioDeClases;
-import persistidor.servicios.ServicioDeObjetos;
-import persistidor.servicios.ServicioDeSesiones;
+import persistidor.excepciones.StructureChangedException;
+import persistidor.excepciones.TipoOValorInvalidoException;
 
 @RestController
 public class ControladorParaPruebas
 {
 	@Autowired
-	private PersistentObject persistentObject;
+	private IPersistentObject persistentObject;
 	
-	@Autowired
-	private ServicioDeSesiones servicioDeSesiones;
-	
-	@Autowired
-	private ServicioDeObjetos servicioDeObjetos;
-	
-	@Autowired
-	private ServicioDeClases servicioDeClases;
-	
-	@GetMapping("store/{id}")
-    public ResponseEntity<?> insert(@PathVariable("id") Integer sId)
+	@GetMapping("storePersona/{idSesion}")
+    public ResponseEntity<?> storePersona(@PathVariable("idSesion") Integer idSesion)
     {
-		Persona persona = CrearPersonaEjemplo();
-		
-		boolean exists = persistentObject.store(sId, persona);
-		
-		return new ResponseEntity<Boolean>(exists, HttpStatus.OK);
+		return store(idSesion, CrearPersonaEjemplo());
     }
 	
-	@GetMapping("load/{id}")
-    public ResponseEntity<Objeto> load(@PathVariable("id") Integer sId)
+	@GetMapping("storePrimitivo/{idSesion}")
+    public ResponseEntity<?> storePrimitivo(@PathVariable("idSesion") Integer idSesion)
     {
-		Sesion sesion = servicioDeSesiones.obtenerSesionPorId(sId);
-		
-		return new ResponseEntity<Objeto>(sesion.getObjetos().get(0), HttpStatus.OK);
+		return store(idSesion, 2);
     }
 	
-	@GetMapping("exists/{id}/{nombreDeClase}")
-    public ResponseEntity<?> exists(@PathVariable("id") Integer sId, @PathVariable("nombreDeClase") String nombreDeClase)
+	@GetMapping("storeNull/{idSesion}")
+    public ResponseEntity<?> storeNull(@PathVariable("idSesion") Integer idSesion)
+    {
+		return store(idSesion, null);
+    }
+	
+	@GetMapping("storeCollecion/{idSesion}")
+    public ResponseEntity<?> storeCollecion(@PathVariable("idSesion") Integer idSesion)
+    {
+		List<Integer> coleccion = new ArrayList<Integer>(); 
+		return store(idSesion, coleccion);
+    }
+	
+	private ResponseEntity<?> store(long idSesion, Object object)
+    {
+		try
+		{
+			boolean exists = persistentObject.store(idSesion, object);
+			
+			return new ResponseEntity<Boolean>(exists, HttpStatus.OK);	
+		}
+		catch (TipoOValorInvalidoException ex)
+		{
+			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+    }
+	
+	@GetMapping("load/{idSesion}/{nombreDeClase}")
+    public ResponseEntity<?> load(@PathVariable("idSesion") Integer idSesion, @PathVariable("nombreDeClase") String nombreDeClase)
     {
 		try
 		{
 			Class<?> clase = Class.forName(nombreDeClase);
 			
-			boolean exists = persistentObject.exists(sId, clase);
+			Object object = persistentObject.load(idSesion, clase);
+		
+			return new ResponseEntity<Object>(object, HttpStatus.OK);
+		}
+		catch (NoExisteSesionException ex)
+		{
+			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		catch (ClassNotFoundException ex)
+		{
+			return new ResponseEntity<String>("No existe clase de nombre; " + ex.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		catch (StructureChangedException ex)
+		{
+			return new ResponseEntity<String>("ERROR: Cambio la estructura del objeto", HttpStatus.BAD_REQUEST);
+		}
+    }
+	
+	@GetMapping("exists/{idSesion}/{nombreDeClase}")
+    public ResponseEntity<?> exists(@PathVariable("idSesion") Integer idSesion, @PathVariable("nombreDeClase") String nombreDeClase)
+    {
+		try
+		{
+			Class<?> clase = Class.forName(nombreDeClase);
+			
+			boolean exists = persistentObject.exists(idSesion, clase);
 			
 			return new ResponseEntity<Boolean>(exists, HttpStatus.OK);
 		}
@@ -69,31 +104,43 @@ public class ControladorParaPruebas
 		}
     }
 	
-	@GetMapping("eliminar/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Integer sId)
-    {
-		//Sesion sesion = servicioDeSesiones.obtenerSesionPorId(sId);
-		
-		//Objeto objeto = sesion.getObjetos().get(0);
-		
-		servicioDeObjetos.eliminarObjetoPorId(1);
-		servicioDeClases.eliminarClasePorId(1);
-		
-		return new ResponseEntity<String>("", HttpStatus.OK);
-    }
-	
-	@GetMapping("elapsedTime/{id}")
-    public ResponseEntity<?> elapsedTime(@PathVariable("id") Integer sId)
+	@GetMapping("elapsedTime/{idSesion}")
+    public ResponseEntity<?> elapsedTime(@PathVariable("idSesion") Integer idSesion)
     {
 		try
 		{
-			long elapsedTime = persistentObject.elapsedTime(sId);
+			long elapsedTime = persistentObject.elapsedTime(idSesion);
 			
 			return new ResponseEntity<Long>(elapsedTime, HttpStatus.OK);
 		}
 		catch (NoExisteSesionException ex)
 		{
 			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+    }
+	
+	@GetMapping("delete/{idSesion}/{nombreDeClase}")
+    public ResponseEntity<?> delete(@PathVariable("idSesion") Integer idSesion, @PathVariable("nombreDeClase") String nombreDeClase)
+    {
+		try
+		{
+			Class<?> clase = Class.forName(nombreDeClase);
+			
+			Object object = persistentObject.delete(idSesion, clase);
+			
+			return new ResponseEntity<Object>(object, HttpStatus.OK);
+		}
+		catch (NoExisteSesionException ex)
+		{
+			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		catch (ClassNotFoundException ex)
+		{
+			return new ResponseEntity<String>("No existe clase de nombre; " + ex.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		catch (StructureChangedException ex)
+		{
+			return new ResponseEntity<String>("ERROR: Cambio la estructura del objeto", HttpStatus.BAD_REQUEST);
 		}
     }
 	

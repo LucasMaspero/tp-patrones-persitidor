@@ -1,0 +1,13 @@
+package persistidor.servicios;
+
+public interface IServicioDeClases
+{
+	/**
+	   * Changes the name of this Student.
+	   * This may involve a lengthy legal process.
+	   * @param newName This Student's new name.  
+	   *                Should include both first
+	   *                and last name.
+	   */
+	boolean eliminarClasePorId(long idClase);
+}

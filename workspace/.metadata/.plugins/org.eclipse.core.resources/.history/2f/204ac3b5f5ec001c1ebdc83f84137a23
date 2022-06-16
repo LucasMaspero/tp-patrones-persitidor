@@ -1,0 +1,8 @@
+package persistidor.comandos;
+
+import persistidor.entidades.Sesion;
+
+public interface ICrearSesionSiNoExisteUObtenerSesionActualComando
+{
+	Sesion ejecutar(long idSesion);
+}

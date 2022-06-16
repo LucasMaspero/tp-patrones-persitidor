@@ -1,0 +1,10 @@
+package persistidor.excepciones;
+
+@SuppressWarnings("serial")
+public class TipoInvalidoException extends Exception
+{
+	public TipoInvalidoException(String mensajeDeError)
+	{
+		super(mensajeDeError);
+	}
+}

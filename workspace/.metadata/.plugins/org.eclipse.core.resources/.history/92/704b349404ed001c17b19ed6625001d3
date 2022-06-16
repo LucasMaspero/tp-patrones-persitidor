@@ -1,0 +1,32 @@
+package persistidor.comandos;
+
+import java.util.Collection;
+import java.util.Map;
+
+import persistidor.excepciones.TipoOValorInvalidoException;
+
+public class ValidarTipoYValorDeObjectComando implements IValidarTipoYValorDeObjectComando
+{
+	public boolean esValido(Object object)
+	{
+		Class<?> claseDelObjeto = object.getClass();
+		
+		System.out.println("Nombre de clase: " + claseDelObjeto.getTypeName());
+		System.out.println("Es collecion?: " + Collection.class.isAssignableFrom(claseDelObjeto));
+		System.out.println("Es diccionario?: " + Map.class.isAssignableFrom(claseDelObjeto));
+		System.out.println("Es array?: " + claseDelObjeto.isArray());
+		System.out.println("Es primitivo?: " + claseDelObjeto.isPrimitive());
+		System.out.println("Es enum?: " + claseDelObjeto.isEnum());
+		System.out.println("Es interface?: " + claseDelObjeto.isInterface());
+		
+		if (Collection.class.isAssignableFrom(claseDelObjeto) || 
+			Map.class.isAssignableFrom(claseDelObjeto) || 
+			claseDelObjeto.isArray() || 
+			claseDelObjeto.isPrimitive() || 
+			claseDelObjeto.isEnum() || 
+			claseDelObjeto.isInterface())
+		{
+			throw new TipoOValorInvalidoException("PeristentObject NO guarda objects de tipo " + claseDelObjeto.getTypeName());
+		}
+	}
+}

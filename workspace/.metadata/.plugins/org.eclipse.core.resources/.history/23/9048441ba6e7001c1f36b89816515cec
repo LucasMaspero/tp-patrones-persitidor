@@ -1,0 +1,42 @@
+package persistidor.comandos;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import persistidor.entidades.Atributo;
+import persistidor.entidades.Clase;
+
+@Component
+public class ObtenerClasesYAtributosAsociadosAClaseComando
+{
+	public void ejecutar(Clase clase, List<Clase> clasesAsociadas, List<Atributo> atributosAsociados)
+	{
+		HashSet<Clase> setClasesAsociadas = new HashSet<Clase>();
+		HashSet<Atributo> setAtributosAsociados = new HashSet<Atributo>();
+		
+		this.obtenerClasesYAtributosAsociados(clase, setClasesAsociadas, setAtributosAsociados);
+		
+		clasesAsociadas = new ArrayList<Clase>(setClasesAsociadas);
+		atributosAsociados = new ArrayList<Atributo>(setAtributosAsociados);
+	}
+	
+	private void obtenerClasesYAtributosAsociados(Clase clase, HashSet<Clase> clasesAsociadas, HashSet<Atributo> atributosAsociados)
+	{
+		clasesAsociadas.add(clase);
+
+		for (Atributo atributo : clase.getAtributos())
+		{
+			atributosAsociados.add(atributo);
+			
+			Clase claseTipo = atributo.getTipoClase();
+			
+			if (claseTipo != null)
+			{
+				obtenerClasesYAtributosAsociados(claseTipo, clasesAsociadas, atributosAsociados);
+			}
+		}
+	}
+}

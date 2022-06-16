@@ -3,34 +3,34 @@ package persistidor.servicios;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import persistidor.comandos.ObtenerClasesYAtributosAsociadosAClaseComando;
+import persistidor.comandos.IObtenerEntidadesClaseYEntidadesAtributoAsociadosAEntidadClaseComando;
 import persistidor.entidades.Atributo;
 import persistidor.entidades.Clase;
-import persistidor.repositorios.RepositorioDeAtributos;
-import persistidor.repositorios.RepositorioDeClases;
+import persistidor.repositorios.IRepositorioDeAtributos;
+import persistidor.repositorios.IRepositorioDeClases;
 
 @Service
-public class ServicioDeClases
+public class ServicioDeClases implements IServicioDeClases
 {
 	@Autowired
-	private RepositorioDeAtributos repositorioDeAtributos;
+	private IRepositorioDeAtributos repositorioDeAtributos;
 	
 	@Autowired
-	private RepositorioDeClases repositorioDeClases;
+	private IRepositorioDeClases repositorioDeClases;
 	
 	@Autowired
-	private ObtenerClasesYAtributosAsociadosAClaseComando obtenerClasesYAtributosAsociadosAClaseComando;
+	private IObtenerEntidadesClaseYEntidadesAtributoAsociadosAEntidadClaseComando obtenerEntidadesClaseYEntidadesAtributoAsociadosAEntidadClaseComando;
 	
-	public void eliminarClasePorId(long idClase)
+	public boolean eliminarClasePorId(long idClase)
 	{
 		Clase clasePadre = repositorioDeClases.findById(idClase).orElse(null);
 		
-		if (clasePadre == null) return;
+		if (clasePadre == null) return false;
 		
-		obtenerClasesYAtributosAsociadosAClaseComando.ejecutar(clasePadre);
+		obtenerEntidadesClaseYEntidadesAtributoAsociadosAEntidadClaseComando.ejecutar(clasePadre);
 		
-		List<Clase> clasesAEliminar = obtenerClasesYAtributosAsociadosAClaseComando.getClasesAsociadas();
-		List<Atributo> atributosAEliminar = obtenerClasesYAtributosAsociadosAClaseComando.getAtributosAsociados();
+		List<Clase> clasesAEliminar = obtenerEntidadesClaseYEntidadesAtributoAsociadosAEntidadClaseComando.getEntidadesClaseAsociadas();
+		List<Atributo> atributosAEliminar = obtenerEntidadesClaseYEntidadesAtributoAsociadosAEntidadClaseComando.getEntidadesAtributoAsociadas();
 		
 		for (Atributo atributo : atributosAEliminar)
 		{
@@ -45,5 +45,7 @@ public class ServicioDeClases
 		{
 			repositorioDeClases.deleteById(clase.getId());
 		}
+		
+		return true;
 	}
 }

@@ -3,13 +3,13 @@ package persistidor.comandos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import persistidor.entidades.Sesion;
-import persistidor.servicios.ServicioDeSesiones;
+import persistidor.servicios.IServicioDeSesiones;
 
 @Component
-public class CrearSesionSiNoExisteUObtenerSesionActualComando
+public class CrearSesionSiNoExisteUObtenerSesionActualComando implements ICrearSesionSiNoExisteUObtenerSesionActualComando
 {
 	@Autowired
-	private ServicioDeSesiones servicioDeSesiones;
+	private IServicioDeSesiones servicioDeSesiones;
 	
 	public Sesion ejecutar(long idSesion)
 	{

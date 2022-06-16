@@ -1,0 +1,8 @@
+package persistidor.comandos;
+
+import persistidor.excepciones.NoExisteSesionException;
+
+public interface IObtenerObjetoDeClaseAsociadoASesionComando
+{
+	<T> boolean ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException;
+}

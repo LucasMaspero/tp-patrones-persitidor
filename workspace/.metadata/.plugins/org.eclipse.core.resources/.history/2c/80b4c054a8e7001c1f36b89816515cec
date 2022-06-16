@@ -1,0 +1,18 @@
+package persistidor.comandos;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import persistidor.entidades.Atributo;
+import persistidor.entidades.Clase;
+
+public class ObtenerAsociadosAObjetoComando
+{
+	@Autowired
+	private ObtenerObjetosYValoresAsociadosAObjetoComando obtenerObjetosYValoresAsociadosAObjetoComando;
+	
+	@Autowired
+	private ObtenerClasesYAtributosAsociadosAClaseComando obtenerClasesYAtributosAsociadosAClaseComando;
+	
+	private List<Clase> clasesAsociadas;
+	private List<Atributo> atributosAsociados;
+}

@@ -1,0 +1,9 @@
+package persistidor.comandos;
+
+import persistidor.entidades.Objeto;
+import persistidor.excepciones.NoExisteSesionException;
+
+public interface IObtenerEntidadObjetoAsociadoASesionComando
+{
+	<T> Objeto ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException;
+}

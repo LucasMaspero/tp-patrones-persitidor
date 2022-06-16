@@ -1,0 +1,8 @@
+package persistidor.servicios;
+
+import persistidor.entidades.Primitivo;
+
+public interface IServicioDePrimitivos
+{
+	Primitivo ObtenerPrimitivoPorNombre(String nombrePrimitivo)
+}

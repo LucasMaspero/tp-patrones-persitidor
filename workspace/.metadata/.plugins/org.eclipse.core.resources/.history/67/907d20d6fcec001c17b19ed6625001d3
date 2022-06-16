@@ -1,0 +1,10 @@
+package persistidor.excepciones;
+
+@SuppressWarnings("serial")
+public class NoGuardaPrimitivosException extends Exception
+{
+	public NoGuardaPrimitivosException(String mensajeDeError)
+	{
+		super(mensajeDeError);
+	}
+}

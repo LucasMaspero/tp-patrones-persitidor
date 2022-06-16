@@ -8,14 +8,14 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="clase_objeto"/>
+			<item value="for (Clase clase : clasesAEliminar)"/>
 			<item value="CLASE_ATRIBUTOS"/>
 			<item value="Direccion1"/>
 			<item value="LaMejorDireccion"/>
 			<item value="Atributo atributoCalleDeDireccion = new Atributo(&quot;calle&quot;, false);"/>
 			<item value="instancia"/>
 			<item value="ExisteObjetoEnLaDbComando"/>
-			<item value="ExisteInstanciaDeClaseParaSesionComando"/>
-			<item value="localhost"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Direccion2"/>

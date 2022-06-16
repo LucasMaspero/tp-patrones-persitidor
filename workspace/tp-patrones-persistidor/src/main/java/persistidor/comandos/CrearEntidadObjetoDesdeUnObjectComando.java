@@ -2,31 +2,33 @@ package persistidor.comandos;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import persistidor.entidades.Atributo;
 import persistidor.entidades.Clase;
 import persistidor.entidades.Objeto;
 import persistidor.entidades.Primitivo;
-import persistidor.entidades.Sesion;
 import persistidor.entidades.Valor;
-import persistidor.servicios.ServicioDePrimitivos;
+import persistidor.servicios.IServicioDePrimitivos;
 
 @Component
-public class CrearEntidadObjetoDesdeUnObjectComando
+public class CrearEntidadObjetoDesdeUnObjectComando implements ICrearEntidadObjetoDesdeUnObjectComando
 {
 	@Autowired
-	private ServicioDePrimitivos servicioDePrimitivos;
+	private IServicioDePrimitivos servicioDePrimitivos;
 	
-	// Crea una entidad objeto a partir de un object.
-	// Si la clase del objeto o (o la propiedad) tiene la anottation Persistable,
-	// asegurarse de cargarla en el "Objeto".
-	// Si la clase del objeto o (o la propiedad) tiene la anottation NotPersistable,
-	// asegurarse de NO cargarla en el "Objeto".
-	// No setear IDs nunca (de ninguna entidad, eso se maneja solo en los repos).
-	public Objeto ejecutar(Object o, Sesion sesion)
+	public Objeto ejecutar(Object o)
 	{
+		// Crea una entidad objeto a partir de un object.
+		// Si la clase del objeto o (o la propiedad) tiene la anottation Persistable,
+		// asegurarse de cargarla en el "Objeto".
+		// Si la clase del objeto o (o la propiedad) tiene la anottation NotPersistable,
+		// asegurarse de NO cargarla en el "Objeto".
+		// No setear IDs nunca (de ninguna entidad, eso se maneja solo en los repos).
+		// Al "Objeto" no hace falta cargarle una sesion (es decir: objeto.setSesion())
+		
+		// TODO ESTO ES UN EJEMPLO DE LO QUE DEBERIIA DEVOLVER SI LE MANDAS UNA INSTANCIA 
+		// DE PERSONA.
 		Primitivo primitivoString = servicioDePrimitivos.ObtenerPrimitivoPorNombre("String");
 		Primitivo primitivoInt = servicioDePrimitivos.ObtenerPrimitivoPorNombre("int");
 		
@@ -152,7 +154,7 @@ public class CrearEntidadObjetoDesdeUnObjectComando
 		valoresDePersona.add(valorDireccion1ParaPersona);
 		valoresDePersona.add(valorDireccion2ParaPersona);
 		
-		Objeto objetoPersona = new Objeto(clasePersona, valoresDePersona, sesion);
+		Objeto objetoPersona = new Objeto(clasePersona, valoresDePersona);
 		
 		return objetoPersona;
 	}

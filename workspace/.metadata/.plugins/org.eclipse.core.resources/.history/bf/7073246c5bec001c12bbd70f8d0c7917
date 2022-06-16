@@ -1,0 +1,14 @@
+package persistidor.comandos;
+
+import java.util.List;
+import persistidor.entidades.Objeto;
+import persistidor.entidades.Valor;
+
+public interface IObtenerEntidadesObjetosYEntidadesValoresAsociadosAEntidadObjetoComando
+{
+	void ejecutar(Objeto objeto);
+	
+	List<Objeto> getObjetosAsociados();
+	
+	List<Valor> getValoresAsociados();
+}

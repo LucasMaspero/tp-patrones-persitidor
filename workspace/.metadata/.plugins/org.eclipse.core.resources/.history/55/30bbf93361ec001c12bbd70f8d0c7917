@@ -1,0 +1,10 @@
+package persistidor.comandos;
+
+import persistidor.entidades.Objeto;
+
+public interface IObtenerEntidadesAsociadasAEntidadObjetoComando
+{
+	void ejecutar(Objeto objeto);
+	
+	
+}

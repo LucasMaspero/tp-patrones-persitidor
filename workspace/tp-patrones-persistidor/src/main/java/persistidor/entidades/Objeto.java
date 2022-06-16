@@ -85,6 +85,11 @@ public class Objeto
 		this.valores.clear();
 	}
 
+	public void setSesion(Sesion sesion)
+	{
+		this.sesion = sesion;
+	}
+
 	@Override
 	public int hashCode()
 	{

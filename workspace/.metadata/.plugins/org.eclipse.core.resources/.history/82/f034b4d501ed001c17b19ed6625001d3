@@ -1,0 +1,8 @@
+package persistidor.comandos;
+
+import persistidor.excepciones.NoExisteSesionException;
+
+public interface IActualizarEntidadObjetoAsociadaASesionComando
+{
+	void ejecutar(long idSesion, Object o) throws NoExisteSesionException;
+}

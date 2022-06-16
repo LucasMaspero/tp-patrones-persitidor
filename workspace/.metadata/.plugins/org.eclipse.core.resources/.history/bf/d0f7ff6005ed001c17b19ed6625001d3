@@ -1,0 +1,31 @@
+package persistidor.comandos;
+
+import java.util.Collection;
+import java.util.Map;
+import persistidor.excepciones.TipoOValorInvalidoException;
+
+public class ValidarTipoDeObjectComando implements IValidarTipoDeObjectComando
+{
+	public boolean esValido(Object object)
+	{
+		Class<?> claseDelObjeto = object.getClass();
+		
+		boolean esEnum = claseDelObjeto.isEnum();
+		boolean esInterfaz = claseDelObjeto.isInterface();
+		boolean esCollection = Collection.class.isAssignableFrom(claseDelObjeto);
+		boolean esDiccionario = Map.class.isAssignableFrom(claseDelObjeto);
+		boolean esArray = claseDelObjeto.isArray();
+		boolean esString = claseDelObjeto == String.class;
+		
+		boolean esInteger = claseDelObjeto.isPrimitive() || claseDelObjeto == ;
+		boolean esByte = claseDelObjeto.isPrimitive() || claseDelObjeto == ;
+		boolean esShort = claseDelObjeto.isPrimitive() || claseDelObjeto == ;
+		boolean esLong = claseDelObjeto.isPrimitive() || claseDelObjeto == ;
+		boolean esFloat = claseDelObjeto.isPrimitive() || claseDelObjeto == ;
+		boolean esDouble = claseDelObjeto.isPrimitive() || claseDelObjeto == ;
+		boolean esChar = claseDelObjeto.isPrimitive() || claseDelObjeto == ;
+		boolean esBoolean = claseDelObjeto.isPrimitive() || claseDelObjeto == ;
+		
+		
+	}
+}

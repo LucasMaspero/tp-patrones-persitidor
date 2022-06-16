@@ -1,0 +1,15 @@
+package persistidor.comandos;
+
+import persistidor.entidades.Objeto;
+import persistidor.excepciones.NoExisteSesionException;
+
+public interface IObtenerEntidadObjetoAsociadoASesionComando
+{
+	/**
+     * Elimina una clase por ID y sus atributos asociados.
+     * @param idClase ID de la clase a eliminar.
+     * Devuelve true si pudo eliminar la clase y sus atributos asociados
+     * o false si NO pudo eliminar la clase y sus atributos asociados.
+    **/
+	<T> Objeto ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException;
+}

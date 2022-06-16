@@ -1,0 +1,10 @@
+package persistidor.comandos;
+
+import persistidor.excepciones.NoExisteSesionException;
+import persistidor.excepciones.StructureChangedException;
+
+public interface IEliminarEntidadObjetoYRelacionadasAsociadoASesionComando
+{
+	
+	<T> T ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException, StructureChangedException;
+}

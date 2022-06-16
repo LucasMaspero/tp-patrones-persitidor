@@ -1,0 +1,15 @@
+package persistidor.comandos;
+
+import persistidor.excepciones.NoExisteSesionException;
+
+public interface IObtenerObjetoDeClaseAsociadoASesionComando
+{
+	/**
+	 * Obtiene la instancia de tipo clazz dada un ID de Sesion.
+	 * Si la sesion NO existe, tira excepcion.
+	 * Si la sesion existe, pero NO tiene ninguna instancia del tipo clazz, devuelve null.
+	 * Si la sesion existe, y tiene ninguna instancia del tipo clazz, la devuelve.
+	 * @param idClase ID de la clase a eliminar. 
+	**/
+	<T> T ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException;
+}

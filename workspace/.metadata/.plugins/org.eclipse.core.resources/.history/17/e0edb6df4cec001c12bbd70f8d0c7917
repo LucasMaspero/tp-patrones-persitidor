@@ -1,0 +1,51 @@
+package persistidor.comandos;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import persistidor.entidades.Clase;
+import persistidor.entidades.Objeto;
+import persistidor.entidades.Sesion;
+import persistidor.excepciones.NoExisteSesionException;
+import persistidor.servicios.IServicioDeClases;
+import persistidor.servicios.ServicioDeObjetos;
+import persistidor.servicios.ServicioDeSesiones;
+
+@Component
+public class EliminarObjetoYRelacionadosAsociadoASesionComando implements IEliminarObjetoYRelacionadosAsociadoASesionComando
+{
+	@Autowired
+	private ServicioDeSesiones servicioDeSesiones;
+	
+	@Autowired
+	private ServicioDeObjetos servicioDeObjetos;
+	
+	@Autowired
+	private IServicioDeClases servicioDeClases;
+	
+	@Autowired
+	private IObtenerEntidadObjetoAsociadoASesionComando obtenerEntidadObjetoAsociadoASesionComando;
+	
+	@Autowired
+	private CrearObjectDesdeEntidadObjetoComando crearObjectDesdeEntidadObjetoComando;
+	
+	public <T> T ejecutar(long idSesion, Class<T> clazz) throws NoExisteSesionException
+	{
+		Objeto entidadObjetoAEliminar = obtenerEntidadObjetoAsociadoASesionComando.ejecutar(idSesion, clazz);
+		
+		if (entidadObjetoAEliminar == null) return null;
+		
+		T objectAsociado = crearObjectDesdeEntidadObjetoComando.ejecutar(entidadObjetoAEliminar);
+		
+		Sesion sesion = servicioDeSesiones.obtenerSesionPorId(idSesion);
+		
+				//Objeto objeto = sesion.getObjetos().get(0);
+				
+				servicioDeObjetos.eliminarObjetoPorId(1);
+				servicioDeClases.eliminarClasePorId(1);
+		
+		return objectAsociado;
+	}
+}

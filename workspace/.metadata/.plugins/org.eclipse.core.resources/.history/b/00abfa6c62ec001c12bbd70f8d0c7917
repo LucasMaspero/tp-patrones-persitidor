@@ -1,0 +1,21 @@
+package persistidor.comandos;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import persistidor.excepciones.NoExisteSesionException;
+
+@Component
+public class ActualizarEntidadObjetoAsociadaASesionComando
+{
+	@Autowired
+	private IEliminarEntidadObjetoYRelacionadasAsociadoASesionComando eliminarEntidadObjetoYRelacionadasAsociadoASesionComando;
+	
+	public void ejecutar(long idSesion, Object o) throws NoExisteSesionException
+	{
+		Class<?> claseDelObjeto = o.getClass();
+		
+		eliminarEntidadObjetoYRelacionadasAsociadoASesionComando.ejecutar(idSesion, claseDelObjeto);
+		
+		// TO DO
+	}
+}

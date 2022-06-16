@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="entidades.Objeto"/>
-<fullyQualifiedTypeName name="entidades.Sesion"/>
-<fullyQualifiedTypeName name="org.springframework.data.repository.CrudRepository"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-<fullyQualifiedTypeName name="repositorios.RepositorioDeClases"/>
-<fullyQualifiedTypeName name="servicios.IServicioDeClases"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-<fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
 <fullyQualifiedTypeName name="entidades.Clase"/>
 <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
 <fullyQualifiedTypeName name="servicios.ServicioDeClases"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan"/>
-<fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeClases"/>
-<fullyQualifiedTypeName name="persistidor.servicios.ServicioDeClases"/>
 <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
 <fullyQualifiedTypeName name="persistidor.api.PersistentObject"/>
@@ -30,9 +19,7 @@
 <fullyQualifiedTypeName name="java.lang.annotation.Retention"/>
 <fullyQualifiedTypeName name="persistidor.excepciones.NoExisteSesionException"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="java.util.HashSet"/>
 <fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Atributo"/>
 <fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDePrimitivos"/>
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
@@ -40,7 +27,6 @@
 <fullyQualifiedTypeName name="persistidor.entidades.Primitivo"/>
 <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Valor"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Clase"/>
 <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
 <fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
 <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
@@ -53,11 +39,25 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeSesiones"/>
 <fullyQualifiedTypeName name="antlr.collections.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="persistidor.comandos.ActualizarObjetoAsociadoASesionComando"/>
 <fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeObjetos"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeObjetos"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Clase"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Atributo"/>
+<fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeValores"/>
+<fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeAtributos"/>
+<fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeClases"/>
+<fullyQualifiedTypeName name="persistidor.servicios.ServicioDeClases"/>
+<fullyQualifiedTypeName name="persistidor.comandos.ObtenerClasesYAtributosAsociadosAClaseComando"/>
+<fullyQualifiedTypeName name="persistidor.comandos.ObtenerObjetosYValoresAsociadosAObjetoComando"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="persistidor.excepciones.NoGuardaPrimitivosException"/>
+<fullyQualifiedTypeName name="persistidor.excepciones.TipoInvalidoException"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="persistidor.comandos.IValidarTipoDeObjectComando"/>
 </qualifiedTypeNameHistroy>

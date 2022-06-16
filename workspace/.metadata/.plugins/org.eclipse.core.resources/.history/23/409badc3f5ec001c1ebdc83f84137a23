@@ -1,0 +1,13 @@
+package persistidor.comandos;
+
+import persistidor.entidades.Sesion;
+
+public interface ICrearSesionSiNoExisteUObtenerSesionActualComando
+{
+	/**
+	 * Devuelve la sesion del respectivo ID o 
+	 * crea una nueva Sesion si no se la encontro en la DB
+	 * @param idClase ID de la clase a eliminar.
+	**/
+	Sesion ejecutar(long idSesion);
+}

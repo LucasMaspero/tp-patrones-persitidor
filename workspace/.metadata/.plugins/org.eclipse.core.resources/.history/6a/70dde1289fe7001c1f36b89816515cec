@@ -1,0 +1,106 @@
+package persistidor.servicios;
+
+import java.util.HashSet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import persistidor.entidades.Atributo;
+import persistidor.entidades.Clase;
+import persistidor.entidades.Objeto;
+import persistidor.entidades.Valor;
+import persistidor.repositorios.RepositorioDeAtributos;
+import persistidor.repositorios.RepositorioDeObjetos;
+import persistidor.repositorios.RepositorioDeValores;
+
+@Service
+public class ServicioDeObjetos
+{
+	@Autowired
+	private RepositorioDeObjetos repositorioDeObjetos;
+	
+	@Autowired
+	private RepositorioDeValores repositorioDeValores;
+	
+	@Autowired
+	private RepositorioDeAtributos repositorioDeAtributos;
+	
+	public void eliminarObjetoPorId(long idObjeto)
+	{
+		Objeto objetoPadre = repositorioDeObjetos.findById(idObjeto).orElse(null);
+		
+		HashSet<Objeto> objetosAEliminar = new HashSet<Objeto>();
+		HashSet<Valor> valoresAEliminar = new HashSet<Valor>();
+		objetosYValoresAEliminar(objetoPadre, objetosAEliminar, valoresAEliminar);
+		
+		Clase clasePadre = objetoPadre.getClase();
+		
+		HashSet<Clase> clasesAEliminar = new HashSet<Clase>();
+		HashSet<Atributo> atributosAEliminar = new HashSet<Atributo>();
+		clasesYAtributosAEliminar(clasePadre, clasesAEliminar, atributosAEliminar);
+		
+		for (Valor valor : valoresAEliminar)
+		{
+			if (valor.tieneRelaciones())
+			{
+				valor.limpiarRelaciones();
+				repositorioDeValores.save(valor);
+			}
+		}
+		
+		for (Objeto objeto : objetosAEliminar)
+		{
+			objeto.limpiarRelaciones();
+			repositorioDeObjetos.save(objeto);
+			repositorioDeObjetos.deleteById(objeto.getId());
+		}
+		
+		for (Atributo atributo : atributosAEliminar)
+		{
+			if (atributo.tieneRelaciones())
+			{
+				atributo.limpiarRelaciones();
+				repositorioDeAtributos.save(atributo);
+			}
+		}
+		
+		for (Objeto objeto : objetosAEliminar)
+		{
+			objeto.limpiarRelaciones();
+			repositorioDeObjetos.save(objeto);
+			repositorioDeObjetos.deleteById(objeto.getId());
+		}
+	}
+	
+	private void objetosYValoresAEliminar(Objeto objeto, HashSet<Objeto> objetosAEliminar, HashSet<Valor> valoresAEliminar)
+	{
+		objetosAEliminar.add(objeto);
+
+		for (Valor valor : objeto.getValores())
+		{
+			valoresAEliminar.add(valor);
+			
+			Objeto valorObjeto = valor.getValorObjeto();
+			
+			if (valorObjeto != null)
+			{
+				objetosYValoresAEliminar(valorObjeto, objetosAEliminar, valoresAEliminar);
+			}
+		}
+	}
+	
+	private void clasesYAtributosAEliminar(Clase clase, HashSet<Clase> clasesAEliminar, HashSet<Atributo> atributosAEliminar)
+	{
+		clasesAEliminar.add(clase);
+
+		for (Atributo atributo : clase.getAtributos())
+		{
+			atributosAEliminar.add(atributo);
+			
+			Clase claseTipo = atributo.getTipoClase();
+			
+			if (claseTipo != null)
+			{
+				clasesYAtributosAEliminar(claseTipo, clasesAEliminar, atributosAEliminar);
+			}
+		}
+	}
+}

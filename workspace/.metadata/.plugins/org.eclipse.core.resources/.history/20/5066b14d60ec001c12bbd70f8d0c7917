@@ -1,0 +1,14 @@
+package persistidor.comandos;
+
+import java.util.List;
+
+import persistidor.entidades.Clase;
+
+public interface IObtenerEntidadesClaseYEntidadesAtributoAsociadosAEntidadClaseComando
+{
+	void ejecutar(Clase clase);
+	
+	List<Clase> getEntidadesClaseAsociadas();
+	
+	
+}

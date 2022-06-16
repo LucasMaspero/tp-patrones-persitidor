@@ -1,0 +1,51 @@
+package persistidor.servicios;
+
+import java.util.HashSet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import persistidor.comandos.ObtenerObjetosYValoresAsociadosAObjetoComando;
+import persistidor.entidades.Objeto;
+import persistidor.entidades.Valor;
+import persistidor.repositorios.RepositorioDeObjetos;
+import persistidor.repositorios.RepositorioDeValores;
+
+@Service
+public class ServicioDeObjetos
+{
+	@Autowired
+	private RepositorioDeObjetos repositorioDeObjetos;
+	
+	@Autowired
+	private RepositorioDeValores repositorioDeValores;
+	
+	@Autowired
+	private ObtenerObjetosYValoresAsociadosAObjetoComando obtenerObjetosYValoresAsociadosAObjetoComando;
+	
+	public void eliminarObjetoPorId(long idObjeto)
+	{
+		Objeto objetoPadre = repositorioDeObjetos.findById(idObjeto).orElse(null);
+		
+		if (objetoPadre == null) return;
+		
+		HashSet<Objeto> objetosAEliminar = new HashSet<Objeto>();
+		HashSet<Valor> valoresAEliminar = new HashSet<Valor>();
+		objetosYValoresAEliminar(objetoPadre, objetosAEliminar, valoresAEliminar);
+		
+		for (Valor valor : valoresAEliminar)
+		{
+			if (valor.tieneRelaciones())
+			{
+				valor.limpiarRelaciones();
+				repositorioDeValores.save(valor);
+			}
+		}
+		
+		for (Objeto objeto : objetosAEliminar)
+		{
+			objeto.limpiarRelaciones();
+			repositorioDeObjetos.save(objeto);
+			repositorioDeObjetos.deleteById(objeto.getId());
+		}
+	}
+}

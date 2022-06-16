@@ -1,0 +1,9 @@
+package persistidor.comandos;
+
+public class ValidarTipoYValorDeObjectComando implements IValidarTipoYValorDeObjectComando
+{
+	public boolean esValido(Object object)
+	{
+		
+	}
+}

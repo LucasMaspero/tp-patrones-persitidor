@@ -2,87 +2,94 @@ package persistidor.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import persistidor.comandos.InsertarObjetoAsociadoASesionComando;
-import persistidor.comandos.ActualizarObjetoAsociadoASesionComando;
-import persistidor.comandos.EliminarObjetoDeClaseAsociadoASesionComando;
-import persistidor.comandos.ExisteObjetoDeClaseAsociadoASesionComando;
-import persistidor.comandos.ObtenerObjetoDeClaseAsociadoASesionComando;
-import persistidor.comandos.ObtenerTiempoTranscurridoDeSesionComando;
+import persistidor.comandos.IActualizarEntidadObjetoAsociadaASesionComando;
+import persistidor.comandos.IEliminarEntidadObjetoYRelacionadasAsociadoASesionComando;
+import persistidor.comandos.IExisteEntidadObjetoAsociadoASesionComando;
+import persistidor.comandos.IInsertarEntidadObjetoAsociadaASesionComando;
+import persistidor.comandos.IObtenerObjectAsociadoASesionComando;
+import persistidor.comandos.IObtenerTiempoTranscurridoDeSesionComando;
+import persistidor.comandos.IValidarTipoDeObjectComando;
 import persistidor.excepciones.NoExisteSesionException;
+import persistidor.excepciones.StructureChangedException;
+import persistidor.excepciones.TipoOValorInvalidoException;
 
 @Component
-public class PersistentObject
+public class PersistentObject implements IPersistentObject
 {
 	@Autowired
-	private InsertarObjetoAsociadoASesionComando insertarObjetoAsociadoASesionComando;
+	private IInsertarEntidadObjetoAsociadaASesionComando insertarEntidadObjetoAsociadaASesionComando;
 	
 	@Autowired
-	private ActualizarObjetoAsociadoASesionComando actualizarObjetoAsociadoASesionComando;
+	private IActualizarEntidadObjetoAsociadaASesionComando actualizarEntidadObjetoAsociadaASesionComando;
 	
 	@Autowired
-	private ObtenerObjetoDeClaseAsociadoASesionComando obtenerObjetoDeClaseAsociadoASesionComando;
+	private IObtenerObjectAsociadoASesionComando obtenerObjectAsociadoASesionComando;
 	
 	@Autowired
-	private ExisteObjetoDeClaseAsociadoASesionComando existeObjetoDeClaseAsociadoASesionComando;
+	private IExisteEntidadObjetoAsociadoASesionComando existeEntidadObjetoAsociadoASesionComando;
 	
 	@Autowired
-	private ObtenerTiempoTranscurridoDeSesionComando obtenerTiempoTranscurridoDeSesionComando;
+	private IObtenerTiempoTranscurridoDeSesionComando obtenerTiempoTranscurridoDeSesionComando;
 	
 	@Autowired
-	private EliminarObjetoDeClaseAsociadoASesionComando eliminarObjetoDeClaseAsociadoASesionComando;
+	private IEliminarEntidadObjetoYRelacionadasAsociadoASesionComando eliminarEntidadObjetoYRelacionadasAsociadoASesionComando;
 	
-	// Almacena la instancia del objeto o asociada a la clave sId, 
-	// o actualiza la instancia existente retornando true o false 
-	// segun actualiza o almacena. 
-	// El objeto o puede ser null, en tal caso el valor que se 
-	// almacenara sera null.
-	public boolean store(long sId, Object o)
+	@Autowired
+	private IValidarTipoDeObjectComando validarTipoDeObjectComando;
+	
+	public boolean store(long sId, Object o) throws TipoOValorInvalidoException
 	{
+		if (o == null)
+		{
+			throw new TipoOValorInvalidoException("PersitentObject NO guarda valores NULL");
+		}
+		
 		Class<?> claseDelObjeto = o.getClass();
+		
+		if (!validarTipoDeObjectComando.esValido(o))
+		{
+			throw new TipoOValorInvalidoException("PeristentObject NO guarda objects de tipo " + claseDelObjeto.getTypeName());
+		}
 		
 		try
 		{
-			if (existeObjetoDeClaseAsociadoASesionComando.ejecutar(sId, claseDelObjeto))
+			if (existeEntidadObjetoAsociadoASesionComando.ejecutar(sId, claseDelObjeto))
 			{
-				actualizarObjetoAsociadoASesionComando.ejecutar(sId, o);
+				actualizarEntidadObjetoAsociadaASesionComando.ejecutar(sId, o);
 				return true;
 			}
 			
-			insertarObjetoAsociadoASesionComando.ejecutar(sId, o);
+			insertarEntidadObjetoAsociadaASesionComando.ejecutar(sId, o);
 		}
 		catch (NoExisteSesionException ex)
 		{
-			insertarObjetoAsociadoASesionComando.ejecutar(sId, o);
+			insertarEntidadObjetoAsociadaASesionComando.ejecutar(sId, o);
 		}
 		
 		return false;
 	}
 	
-	// Devuelve la instancia del objeto o asociada a la clave sId.
-	public <T> T load(long sId, Class<T> clazz) throws NoExisteSesionException
+	public <T> T load(long sId, Class<T> clazz) throws NoExisteSesionException, StructureChangedException
 	{
-		return obtenerObjetoDeClaseAsociadoASesionComando.ejecutar(sId, clazz);
+		return obtenerObjectAsociadoASesionComando.ejecutar(sId, clazz);
 	}
 	
-	// Retorna true o false según exista o un una instancia
-	// de clazz (aunque sea null) asociada a la clave sId.
 	public <T> boolean exists(long sId, Class<T> clazz) throws NoExisteSesionException
 	{
-		return existeObjetoDeClaseAsociadoASesionComando.ejecutar(sId, clazz);
+		return existeEntidadObjetoAsociadoASesionComando.ejecutar(sId, clazz);
 	}
 	
-	// Retorna (en milisegundos) el tiempo transcurrido 
-	// desde el ultimo acceso registrado para la clave sId, 
-	// sin considerar las llamadas a este metodo ni a exists.
 	public long elapsedTime(long sId) throws NoExisteSesionException
 	{
 		return obtenerTiempoTranscurridoDeSesionComando.ejecutar(sId);
 	}
 	
-	// retorna y elimina la instancia de clazz vinculada a la
-	// clave sId, o retorna null si no existe dicha instancia
-	public <T> T delete(long sId, Class<T> clazz) throws NoExisteSesionException
+	public <T> T delete(long sId, Class<T> clazz) throws NoExisteSesionException, StructureChangedException
 	{
-		return eliminarObjetoDeClaseAsociadoASesionComando.ejecutar(sId, clazz);
+		T objectAsociadoASesion = obtenerObjectAsociadoASesionComando.ejecutar(sId, clazz);
+		
+		eliminarEntidadObjetoYRelacionadasAsociadoASesionComando.ejecutar(sId, clazz);
+		
+		return objectAsociadoASesion;
 	}
 }
