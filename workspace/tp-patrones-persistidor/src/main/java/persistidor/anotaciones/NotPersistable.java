@@ -1,8 +1,12 @@
 package persistidor.anotaciones;
 
-//La hacen mis compañeros
-// Buscar como definir que la anotacion puedar ir a nivel clase, a nivel metodo o a nivel propiedad
-// Necesitamos que sea a nivel clase y a nivel propiedad
-public @interface NotPersistable 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
+
+@Retention(RetentionPolicy.CLASS)
+@Target({ElementType.METHOD, ElementType.TYPE})
+public @interface NotPersistable
 {
 }

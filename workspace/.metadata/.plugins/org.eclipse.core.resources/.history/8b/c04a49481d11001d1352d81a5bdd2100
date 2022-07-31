@@ -1,0 +1,211 @@
+package persistidor.comandos;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import persistidor.entidades.Objeto;
+import persistidor.servicios.IServicioDePrimitivos;
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import persistidor.entidades.Atributo;
+import persistidor.entidades.Clase;
+import persistidor.entidades.Primitivo;
+import persistidor.entidades.Valor;
+import persistidor.servicios.IServicioDeClases;
+import persistidor.servicios.ServicioDeClases;
+import persistidor.servicios.ServicioDePrimitivos;
+
+@Component
+public class CrearEntidadObjetoDesdeUnObjectComando implements ICrearEntidadObjetoDesdeUnObjectComando
+{
+	@Autowired
+	private IServicioDePrimitivos servicioDePrimitivos;
+	
+	@Autowired
+	private IServicioDeClases servicioDeClases;
+	
+	public Objeto ejecutar(Object o)
+	{
+		Objeto objeto = new Objeto();
+		Clase claseAGuardar = new Clase();
+		
+		String clase = o.getClass().toString().split(" ")[1];
+
+		claseAGuardar.setNombre(clase);
+
+		objeto.setClase(claseAGuardar);
+
+		Field[] campos = o.getClass().getDeclaredFields();
+
+		List<Atributo> atributos = new ArrayList<>();
+		
+		Arrays.stream(campos).forEach(c -> 
+		{
+			Atributo atributo = new Atributo();
+			atributo.setNombre(c.getName());
+			Class<?> tipoClase = c.getType();
+			String tipo = String.valueOf(tipoClase);
+
+			if (tipo.split(" ").length == 2)
+			{
+				tipo = tipo.split(" ")[1];
+			}
+
+			boolean esColeccion = Collection.class.isAssignableFrom(c.getType());
+			atributo.setEsColeccion(esColeccion);
+			atributo.setClasePadre(claseAGuardar);
+
+			Object valor = null;
+
+			// Por las dudas: revisar
+			String nombreMetodoGet = "get" + upperCaseFirst(c.getName());
+
+			try 
+			{
+				Method metodoGet = o.getClass().getMethod(nombreMetodoGet);
+				valor = metodoGet.invoke(o);
+			} 
+			catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) 
+			{
+				// Ver que hacemos con la excepciones
+				e.printStackTrace();
+			}
+
+			boolean esPrimitivo = tipo == "java.lang.String" || tipoClase.isPrimitive();
+		
+			if (esPrimitivo) 
+			{
+				//Primitivo primitivo = servicioDePrimitivos.obtenerPrimitivo(tipo.toString());
+				Primitivo primitivo = new Primitivo();
+				primitivo.setNombre(tipo);
+				atributo.setTipoPrimitivo(primitivo);
+				if (valor != null) {
+					Valor valorAtributo = new Valor();
+					valorAtributo.setValorPrimitivo(valor.toString());
+					valorAtributo.setAtributo(atributo);
+					valorAtributo.setObjetoPadre(objeto);
+					objeto.agregarValor(valorAtributo);
+				}
+			} else {
+				if (servicioDeClases.existeEnDB(tipo)) {
+					Clase tipoClase = servicioDeClases.obtenerClase(tipo);
+					atributo.setTipoClase(tipoClase);
+				} else {
+					Clase nuevaClase = new Clase();
+					nuevaClase.setNombre(tipo);
+					atributo.setTipoClase(nuevaClase);
+				}
+				if (valor != null) {
+					CrearEntidadObjetoDesdeUnObjectComando crearObjetoEnLaDbComando = new CrearEntidadObjetoDesdeUnObjectComando();
+					if(esColeccion){
+						ParameterizedType tipoParam = (ParameterizedType) c.getGenericType();
+						Class<?> claseDeLista = (Class<?>) tipoParam.getActualTypeArguments()[0];
+						String tipoLista;
+						if(claseDeLista.toString().split(" ").length == 2){
+							tipoLista = claseDeLista.toString().split(" ")[1];
+						} else {
+							tipoLista = claseDeLista.toString();
+						}
+
+						List<?> lista = (List<?>) valor;
+						for(int i = 0; i < lista.size(); i++){
+							if(servicioDePrimitivos.existeEnDB(tipoLista)){
+
+								Primitivo primitivo = new Primitivo();
+								primitivo.setNombre(tipoLista);
+								atributo.setTipoPrimitivo(primitivo);
+								Valor valorAtributo = new Valor();
+								valorAtributo.setValorPrimitivo(lista.get(i).toString());
+								valorAtributo.setAtributo(atributo);
+								valorAtributo.setObjetoPadre(objeto);
+								objeto.agregarValor(valorAtributo);
+							} else {
+								if (servicioDeClases.existeEnDB(tipo)) {
+									Clase tipoClase = servicioDeClases.obtenerClase(tipo);
+									atributo.setTipoClase(tipoClase);
+								} else {
+									Clase nuevaClase = new Clase();
+									nuevaClase.setNombre(tipoLista);
+									atributo.setTipoClase(nuevaClase);
+								}
+
+								Objeto valorObjeto = crearObjetoEnLaDbComando.ejecutar(lista.get(i));
+								Valor valorAtributo = new Valor();
+								valorAtributo.setValorObjeto(valorObjeto);
+								valorAtributo.setAtributo(atributo);
+								valorAtributo.setObjetoPadre(objeto);
+								objeto.agregarValor(valorAtributo);
+							}
+						}
+					} else {
+						Objeto valorObjeto = crearObjetoEnLaDbComando.ejecutar(valor);
+						Valor valorAtributo = new Valor();
+						valorAtributo.setValorObjeto(valorObjeto);
+						valorAtributo.setAtributo(atributo);
+						valorAtributo.setObjetoPadre(objeto);
+						objeto.agregarValor(valorAtributo);
+					}
+				}
+			}
+
+			atributos.add(atributo);
+		});
+
+		claseAGuardar.setAtributos(atributos);
+
+		return objeto;
+	}
+	
+	private String upperCaseFirst(String val) {
+		char[] arr = val.toCharArray();
+		arr[0] = Character.toUpperCase(arr[0]);
+		return new String(arr);
+	}
+
+	public Valor crearValorPrimitivo(String nombreMetodoGet, Object o, Objeto objeto, Atributo atributo) {
+		Object valor = null;
+		try {
+			Method metodoGet = o.getClass().getMethod(nombreMetodoGet);
+			valor = metodoGet.invoke(o, null);
+		} catch(NoSuchMethodException |IllegalAccessException |
+		InvocationTargetException e)
+
+		{
+			e.printStackTrace();
+		}
+
+		String valorString = valor.toString();
+
+		Valor valorAtributo = new Valor();
+
+		valorAtributo.setAtributo(atributo);
+		valorAtributo.setValorObjeto(objeto);
+		valorAtributo.setValorPrimitivo(valorString);
+
+		return valorAtributo;
+	}
+
+	public Valor crearValorObjeto(String nombreMetodoGet, Object o, Objeto objeto, Atributo atributo){
+		Object valor = null;
+		try {
+			Method metodoGet = o.getClass().getMethod(nombreMetodoGet);
+			valor = metodoGet.invoke(o, null);
+		} catch(NoSuchMethodException |IllegalAccessException |
+				InvocationTargetException e)
+
+		{
+			e.printStackTrace();
+		}
+		CrearEntidadObjetoDesdeUnObjectComando comando = new CrearEntidadObjetoDesdeUnObjectComando();
+		Objeto valorObjeto = comando.ejecutar(valor);
+
+		Valor valorAtributo = new Valor();
+
+		valorAtributo.setObjetoPadre(valorObjeto);
+		valorAtributo.setValorObjeto(objeto);
+
+		return valorAtributo;
+	}
+}
