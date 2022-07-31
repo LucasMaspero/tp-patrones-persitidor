@@ -1,9 +1,0 @@
-package persistidor.comandos;
-
-import persistidor.entidades.Objeto;
-import persistidor.entidades.Sesion;
-
-public interface ICrearEntidadObjetoDesdeUnObjectComando
-{
-	Objeto ejecutar(Object o);
-}

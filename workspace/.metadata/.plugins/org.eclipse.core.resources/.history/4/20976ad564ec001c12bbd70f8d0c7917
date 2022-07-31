@@ -1,9 +1,0 @@
-package persistidor.comandos;
-
-import persistidor.entidades.Objeto;
-import persistidor.excepciones.StructureChangedException;
-
-public interface ICrearObjectDesdeEntidadObjetoComando
-{
-	<T> T ejecutar(Objeto entidadObjeto) throws StructureChangedException;
-}

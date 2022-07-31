@@ -3,16 +3,20 @@ package persistidor.controladores;
 public class Direccion
 {
 	private String calle;
-	private int numbero;
+	private int numero;
 	private String codigoPostal;
 	private String localidad;
 	private String provincia;
 	private String pais;
 	
-	public Direccion(String calle, int numbero, String codigoPostal, String localidad, String provincia, String pais)
+	public Direccion()
+	{
+	}
+	
+	public Direccion(String calle, int numero, String codigoPostal, String localidad, String provincia, String pais)
 	{
 		this.calle = calle;
-		this.numbero = numbero;
+		this.numero = numero;
 		this.codigoPostal = codigoPostal;
 		this.localidad = localidad;
 		this.provincia = provincia;
@@ -29,14 +33,14 @@ public class Direccion
 		this.calle = calle;
 	}
 
-	public int getNumbero()
+	public int getNumero()
 	{
-		return numbero;
+		return numero;
 	}
 
-	public void setNumbero(int numbero)
+	public void setNumero(int numero)
 	{
-		this.numbero = numbero;
+		this.numero = numero;
 	}
 
 	public String getCodigoPostal()
@@ -82,6 +86,6 @@ public class Direccion
 	@Override
 	public String toString()
 	{
-		return "Direccion [calle="+calle+", numbero="+numbero+", codigoPostal="+codigoPostal+", localidad="+localidad+", provincia="+provincia+", pais="+pais+"]";
+		return "Direccion [calle="+calle+", numbero="+numero+", codigoPostal="+codigoPostal+", localidad="+localidad+", provincia="+provincia+", pais="+pais+"]";
 	}
 }

@@ -1,8 +1,0 @@
-package persistidor.comandos;
-
-import persistidor.excepciones.NoExisteSesionException;
-
-public interface IObtenerTiempoTranscurridoDeSesionComando
-{
-	long ejecutar(long idSesion) throws NoExisteSesionException;
-}

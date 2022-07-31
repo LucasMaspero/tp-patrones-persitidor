@@ -1,7 +1,0 @@
-package persistidor.comandos;
-
-@Component
-public class ObtenerObjetoDeClaseAsociadoASesionComando
-{
-
-}

@@ -1,6 +1,0 @@
-package persistidor.excepciones;
-
-public class NoGuardaPrimitivosException
-{
-
-}

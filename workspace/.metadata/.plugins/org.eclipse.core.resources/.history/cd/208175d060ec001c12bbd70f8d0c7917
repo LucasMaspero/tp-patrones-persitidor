@@ -1,8 +1,0 @@
-package persistidor.comandos;
-
-import persistidor.entidades.Objeto;
-
-public interface ICrearObjectDesdeEntidadObjetoComando
-{
-	<T> T ejecutar(Objeto o);
-}

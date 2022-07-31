@@ -1,0 +1,18 @@
+package persistidor.excepciones;
+
+@SuppressWarnings("serial")
+public class StructureChangedException extends Exception
+{
+	public StructureChangedException(String mensajeDeError, Exception innerException)
+	{
+		super(mensajeDeError, innerException);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "StructureChangedException [toString()="+super.toString()+"]";
+	}
+	
+	
+}

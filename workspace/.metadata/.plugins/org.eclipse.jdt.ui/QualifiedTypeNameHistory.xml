@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="entidades.Clase"/>
-<fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
 <fullyQualifiedTypeName name="servicios.ServicioDeClases"/>
 <fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan"/>
@@ -24,9 +21,7 @@
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDePrimitivos"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Primitivo"/>
 <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Valor"/>
 <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
 <fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
 <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
@@ -43,21 +38,26 @@
 <fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeObjetos"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeObjetos"/>
 <fullyQualifiedTypeName name="java.util.HashSet"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Clase"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Atributo"/>
 <fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeValores"/>
 <fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeAtributos"/>
 <fullyQualifiedTypeName name="persistidor.repositorios.RepositorioDeClases"/>
 <fullyQualifiedTypeName name="persistidor.servicios.ServicioDeClases"/>
 <fullyQualifiedTypeName name="persistidor.comandos.ObtenerClasesYAtributosAsociadosAClaseComando"/>
 <fullyQualifiedTypeName name="persistidor.comandos.ObtenerObjetosYValoresAsociadosAObjetoComando"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="persistidor.excepciones.NoGuardaPrimitivosException"/>
 <fullyQualifiedTypeName name="persistidor.excepciones.TipoInvalidoException"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="persistidor.comandos.IValidarTipoDeObjectComando"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Clase"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Atributo"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Valor"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Primitivo"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Field"/>
+<fullyQualifiedTypeName name="java.lang.Class"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

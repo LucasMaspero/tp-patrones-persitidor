@@ -1,6 +1,0 @@
-package persistidor.api;
-
-public interface IPersistentObject
-{
-
-}

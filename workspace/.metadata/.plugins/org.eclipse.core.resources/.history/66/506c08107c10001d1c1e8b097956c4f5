@@ -1,0 +1,111 @@
+package persistidor.comandos;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.stereotype.Component;
+import persistidor.entidades.Atributo;
+import persistidor.entidades.Clase;
+import persistidor.entidades.Objeto;
+import persistidor.entidades.Primitivo;
+import persistidor.entidades.Valor;
+import persistidor.excepciones.StructureChangedException;
+
+@Component
+public class CrearObjectDesdeEntidadObjetoComando implements ICrearObjectDesdeEntidadObjetoComando
+{
+	public <T> T ejecutar(Objeto entidadObjeto) throws StructureChangedException
+	{
+		try
+		{
+			Clase entidadClase = entidadObjeto.getClase();
+			String nombreDeClase = entidadClase.getNombre();
+			Class<?> clase = Class.forName(nombreDeClase);
+			Object objeto = clase.newInstance();
+			List<Valor> entidadesValor = entidadObjeto.getValores();
+			
+			for (Valor entidadValor : entidadesValor)
+			{
+				Atributo entidadAtributo = entidadValor.getAtributo();
+				String nombreAtributo = entidadAtributo.getNombre();
+				boolean esPrimitivo = entidadAtributo.esPrimitivo();
+				boolean esColeccion = entidadAtributo.getEsColeccion();
+				Primitivo entidadPrimitivo = entidadAtributo.getTipoPrimitivo();
+				String nombrePrimitivo = esPrimitivo ? entidadPrimitivo.getNombre() : null;
+				String valorPrimitivo = esPrimitivo ? entidadValor.getValorPrimitivo() : null;
+				Object primitivoCasteado = esPrimitivo ? obtenerValorPrimitivoCasteado(nombrePrimitivo, valorPrimitivo) : null;
+				Objeto entidadObjetoDeValorObjeto = entidadValor.getValorObjeto();
+				Object valorObjeto = esPrimitivo ? null : ejecutar(entidadObjetoDeValorObjeto);
+
+				Field atributo = clase.getDeclaredField(nombreAtributo);
+				atributo.setAccessible(true);
+				
+				if (esColeccion)
+				{
+					// Instanciar la coleccion si no fue instanciada anteriormente!
+					ArrayList coleccion = (ArrayList)atributo.get(objeto);
+					
+					if (coleccion == null)
+					{
+						coleccion = new ArrayList();
+					}
+					
+					if (esPrimitivo)
+					{
+						coleccion.add(primitivoCasteado);	
+					}
+					else
+					{
+						coleccion.add(valorObjeto);
+					}
+					
+					atributo.set(objeto, coleccion);
+				}
+				else
+				{
+					if (esPrimitivo)
+					{
+						atributo.set(objeto, primitivoCasteado);	
+					}
+					else
+					{
+						atributo.set(objeto, valorObjeto);
+					}
+				}
+			}
+			
+			return (T)objeto;
+		}
+		catch(InstantiationException | IllegalAccessException | ClassNotFoundException | NoSuchFieldException ex)
+		{
+			throw new StructureChangedException("ERROR: Cambio la estructura de la clase!");
+		}
+	}
+	
+	private Object obtenerValorPrimitivoCasteado(String nombrePrimitivo, String valorPrimitivo)
+	{
+		switch(nombrePrimitivo.toLowerCase()) 
+		{
+			case "string":
+				return valorPrimitivo;
+			case "int":
+				return Integer.parseInt(valorPrimitivo);
+			case "byte":
+				return Byte.parseByte(valorPrimitivo);
+			case "short":
+				return Short.parseShort(valorPrimitivo);
+			case "long":
+				return Long.parseLong(valorPrimitivo);
+			case "float":
+				return Float.parseFloat(valorPrimitivo);
+			case "double":
+				return Double.parseDouble(valorPrimitivo);
+			case "char":
+				return valorPrimitivo.charAt(0);
+			case "boolean":
+				return Boolean.parseBoolean(valorPrimitivo);
+		}
+		
+		return null;
+	}
+}

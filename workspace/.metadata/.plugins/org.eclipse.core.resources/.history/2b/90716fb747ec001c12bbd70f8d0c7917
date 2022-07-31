@@ -1,6 +1,0 @@
-package persistidor.servicios;
-
-public interface IServicioDeClases
-{
-	boolean eliminarClasePorId(long idClase);
-}

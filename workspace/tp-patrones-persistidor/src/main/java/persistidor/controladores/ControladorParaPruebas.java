@@ -79,7 +79,7 @@ public class ControladorParaPruebas
 		}
 		catch (StructureChangedException ex)
 		{
-			return new ResponseEntity<String>("ERROR: Cambio la estructura del objeto", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}
     }
 	
@@ -140,7 +140,7 @@ public class ControladorParaPruebas
 		}
 		catch (StructureChangedException ex)
 		{
-			return new ResponseEntity<String>("ERROR: Cambio la estructura del objeto", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(ex.toString(), HttpStatus.BAD_REQUEST);
 		}
     }
 	
@@ -159,6 +159,6 @@ public class ControladorParaPruebas
 		telefonos.add("5555-3333");
 		telefonos.add("6666-4444");
 		
-		return new Persona("123", "Pepe", telefonos, laMejorDireccion, direcciones);
+		return new Persona(123, "Pepe", telefonos, laMejorDireccion, direcciones);
 	}
 }

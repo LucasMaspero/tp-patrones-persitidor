@@ -1,6 +1,0 @@
-package persistidor.comandos;
-
-public interface IObtenerEntidadesObjetosYEntidadesValoresAsociadosAEntidadObjetoComando
-{
-
-}

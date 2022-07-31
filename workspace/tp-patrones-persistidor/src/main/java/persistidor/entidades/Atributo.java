@@ -98,6 +98,11 @@ public class Atributo
 	{
 		return this.tipoClase != null;
 	}
+	
+	public boolean esPrimitivo()
+	{
+		return tipoPrimitivo != null;
+	}
 
 	@Override
 	public int hashCode()
