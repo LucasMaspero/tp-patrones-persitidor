@@ -33,7 +33,7 @@ public class CrearObjectDesdeEntidadObjetoComando implements ICrearObjectDesdeEn
 				Atributo entidadAtributo = entidadValor.getAtributo();
 				String nombreAtributo = entidadAtributo.getNombre();
 				boolean esPrimitivo = entidadAtributo.esPrimitivo();
-				boolean esColeccion = entidadAtributo.getEsColeccion();
+				boolean esColeccion = entidadAtributo.esColeccion();
 				Primitivo entidadPrimitivo = entidadAtributo.getTipoPrimitivo();
 				String nombrePrimitivo = esPrimitivo ? entidadPrimitivo.getNombre() : null;
 				String valorPrimitivo = esPrimitivo ? entidadValor.getValorPrimitivo() : null;

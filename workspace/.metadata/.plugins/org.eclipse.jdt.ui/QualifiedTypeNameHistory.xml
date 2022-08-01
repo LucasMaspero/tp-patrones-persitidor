@@ -44,20 +44,20 @@
 <fullyQualifiedTypeName name="persistidor.comandos.ObtenerObjetosYValoresAsociadosAObjetoComando"/>
 <fullyQualifiedTypeName name="persistidor.excepciones.NoGuardaPrimitivosException"/>
 <fullyQualifiedTypeName name="persistidor.excepciones.TipoInvalidoException"/>
-<fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="persistidor.comandos.IValidarTipoDeObjectComando"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Objeto"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Sesion"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Clase"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="persistidor.entidades.Atributo"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Valor"/>
 <fullyQualifiedTypeName name="persistidor.entidades.Primitivo"/>
-<fullyQualifiedTypeName name="java.lang.reflect.Field"/>
 <fullyQualifiedTypeName name="java.lang.Class"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="persistidor.anotaciones.Persistable"/>
+<fullyQualifiedTypeName name="java.lang.reflect.Field"/>
+<fullyQualifiedTypeName name="persistidor.entidades.Atributo"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
 </qualifiedTypeNameHistroy>

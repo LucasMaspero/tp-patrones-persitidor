@@ -64,7 +64,7 @@ public class Atributo
 		return nombre;
 	}
 
-	public Boolean getEsColeccion()
+	public Boolean esColeccion()
 	{
 		return esColeccion;
 	}
