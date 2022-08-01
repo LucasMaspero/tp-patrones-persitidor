@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import persistidor.api.IPersistentObject;
+import persistidor.excepciones.NadaQuePersistirException;
 import persistidor.excepciones.NoExisteSesionException;
 import persistidor.excepciones.StructureChangedException;
 import persistidor.excepciones.TipoOValorInvalidoException;
@@ -53,6 +54,10 @@ public class ControladorParaPruebas
 			return new ResponseEntity<Boolean>(exists, HttpStatus.OK);	
 		}
 		catch (TipoOValorInvalidoException ex)
+		{
+			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		catch(NadaQuePersistirException ex)
 		{
 			return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 		}

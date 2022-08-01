@@ -1,7 +1,10 @@
 package persistidor.controladores;
 
 import java.util.ArrayList;
+import persistidor.anotaciones.NotPersistable;
+import persistidor.anotaciones.Persistable;
 
+@Persistable
 public class Persona
 {
 	private int dni;

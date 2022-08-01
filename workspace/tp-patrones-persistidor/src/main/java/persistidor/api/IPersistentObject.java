@@ -1,5 +1,6 @@
 package persistidor.api;
 
+import persistidor.excepciones.NadaQuePersistirException;
 import persistidor.excepciones.NoExisteSesionException;
 import persistidor.excepciones.TipoOValorInvalidoException;
 import persistidor.excepciones.StructureChangedException;
@@ -9,11 +10,10 @@ public interface IPersistentObject
 	/**
      * Almacena la instancia del objeto o asociada a la clave sId, 
      * o actualiza la instancia existente retornando true o false 
-     * segun actualiza o almacena. 
-     * El objeto o puede ser null, en tal caso el valor que se 
-     * almacenara sera null.
+     * segun actualiza o almacena.
+	 * @throws NadaQuePersistirException 
     **/
-	boolean store(long sId, Object o) throws TipoOValorInvalidoException;
+	boolean store(long sId, Object o) throws TipoOValorInvalidoException, NadaQuePersistirException;
 	
 	/**
      * Devuelve la instancia del objeto o asociada a la clave sId.

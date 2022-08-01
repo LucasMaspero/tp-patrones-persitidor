@@ -9,6 +9,7 @@ import persistidor.comandos.IInsertarEntidadObjetoAsociadaASesionComando;
 import persistidor.comandos.IObtenerObjectAsociadoASesionComando;
 import persistidor.comandos.IObtenerTiempoTranscurridoDeSesionComando;
 import persistidor.comandos.IValidarTipoDeObjectComando;
+import persistidor.excepciones.NadaQuePersistirException;
 import persistidor.excepciones.NoExisteSesionException;
 import persistidor.excepciones.StructureChangedException;
 import persistidor.excepciones.TipoOValorInvalidoException;
@@ -37,7 +38,7 @@ public class PersistentObject implements IPersistentObject
 	@Autowired
 	private IValidarTipoDeObjectComando validarTipoDeObjectComando;
 	
-	public boolean store(long sId, Object o) throws TipoOValorInvalidoException
+	public boolean store(long sId, Object o) throws TipoOValorInvalidoException, NadaQuePersistirException
 	{
 		if (o == null)
 		{

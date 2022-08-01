@@ -1,0 +1,17 @@
+package persistidor.comandos;
+
+import java.util.List;
+import persistidor.entidades.Clase;
+import persistidor.entidades.Valor;
+import persistidor.excepciones.TipoOValorInvalidoException;
+
+public interface ICrearEntidadesValorDesdeObjectComando
+{
+	/**
+     * .
+     * @param clase clase que contiene los valores a crear.
+     * @param entidadClase entidad clase relacionada a la clase.
+     * @param o objecto que contiene los valores a crear.
+    **/
+	List<Valor> ejecutar(Class clase, Clase entidadClase, Object o) throws TipoOValorInvalidoException;
+}

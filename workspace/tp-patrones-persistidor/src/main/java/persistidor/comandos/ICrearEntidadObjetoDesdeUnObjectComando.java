@@ -1,6 +1,7 @@
 package persistidor.comandos;
 
 import persistidor.entidades.Objeto;
+import persistidor.excepciones.NadaQuePersistirException;
 import persistidor.excepciones.TipoOValorInvalidoException;
 
 public interface ICrearEntidadObjetoDesdeUnObjectComando
@@ -13,5 +14,5 @@ public interface ICrearEntidadObjetoDesdeUnObjectComando
 	 * @param object object a partir del cual se creara la entidad objeto.
 	 * @throws TipoOValorInvalidoException 
 	**/
-	Objeto ejecutar(Object object) throws TipoOValorInvalidoException;
+	Objeto ejecutar(Object object) throws TipoOValorInvalidoException, NadaQuePersistirException;
 }

@@ -3,13 +3,12 @@ package persistidor.comandos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import persistidor.entidades.Objeto;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import persistidor.entidades.Atributo;
+import persistidor.anotaciones.NotPersistable;
+import persistidor.anotaciones.Persistable;
 import persistidor.entidades.Clase;
 import persistidor.entidades.Valor;
+import persistidor.excepciones.NadaQuePersistirException;
 import persistidor.excepciones.TipoOValorInvalidoException;
 
 @Component
@@ -18,75 +17,26 @@ public class CrearEntidadObjetoDesdeUnObjectComando implements ICrearEntidadObje
 	@Autowired
 	private ICrearEntidadClaseDesdeClassComando crearEntidadClaseDesdeClassComando;
 	
-	public Objeto ejecutar(Object o) throws TipoOValorInvalidoException
+	@Autowired
+	private ICrearEntidadesValorDesdeObjectComando crearEntidadesValorDesdeObjectComando;
+	
+	public Objeto ejecutar(Object o) throws TipoOValorInvalidoException, NadaQuePersistirException
 	{
 		Class clase = o.getClass();
+		
+		if (clase.isAnnotationPresent(NotPersistable.class))
+		{
+			throw new NadaQuePersistirException("ERROR: La clase a persistir esta anotada con NotPersistable");
+		}
+		
+		if (!clase.isAnnotationPresent(Persistable.class))
+		{
+			throw new NadaQuePersistirException("ERROR: La clase a persistir NO esta anotada con Persistable");
+		}
+		
 		Clase entidadClase = crearEntidadClaseDesdeClassComando.ejecutar(clase);
-		List<Valor> entidadesValores = obtenerEntidadesValor(clase, entidadClase, o);
+		List<Valor> entidadesValores = crearEntidadesValorDesdeObjectComando.ejecutar(clase, entidadClase, o);
 		
 		return new Objeto(entidadClase, entidadesValores);
-	}
-	
-	private List<Valor> obtenerEntidadesValor(Class clase, Clase entidadClase, Object o) throws TipoOValorInvalidoException
-	{
-		try
-		{
-			List<Valor> entidadesValores = new ArrayList<Valor>();
-			
-			Field[] atributos = clase.getDeclaredFields();
-			for (Field atributo : atributos)
-			{
-				atributo.setAccessible(true);
-				Atributo entidadAtributoRelacionada = obtenerEntidadAtributoRelacionada(entidadClase, atributo);
-				
-				if (entidadAtributoRelacionada.esPrimitivo())
-				{
-					if (entidadAtributoRelacionada.esColeccion())
-					{
-						Collection coleccion = (Collection)atributo.get(o);
-						for (Object valorDeColeccion : coleccion)
-						{
-							String valorDelAtributo = valorDeColeccion.toString();
-							entidadesValores.add(new Valor(valorDelAtributo, entidadAtributoRelacionada));
-						}
-					}
-					else
-					{
-						String valorDelAtributo = atributo.get(o).toString();
-						entidadesValores.add(new Valor(valorDelAtributo, entidadAtributoRelacionada));
-					}
-				}
-				else
-				{
-					if (entidadAtributoRelacionada.esColeccion())
-					{
-						
-					}
-					else
-					{
-						
-					}
-				}
-			}
-			
-			return entidadesValores;
-		}
-		catch (IllegalArgumentException | IllegalAccessException ex)
-		{
-			throw new TipoOValorInvalidoException("Error al intentar obtener valor de atributo");
-		}
-	}
-	
-	private Atributo obtenerEntidadAtributoRelacionada(Clase entidadClase, Field atributo)
-	{
-		for (Atributo entidadAtributo : entidadClase.getAtributos())
-		{
-			if (entidadAtributo.getNombre() == atributo.getName())
-			{
-				return entidadAtributo;
-			}
-		}
-		
-		return null;
 	}
 }

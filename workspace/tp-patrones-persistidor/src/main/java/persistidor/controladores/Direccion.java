@@ -1,5 +1,9 @@
 package persistidor.controladores;
 
+import persistidor.anotaciones.NotPersistable;
+import persistidor.anotaciones.Persistable;
+
+@Persistable
 public class Direccion
 {
 	private String calle;

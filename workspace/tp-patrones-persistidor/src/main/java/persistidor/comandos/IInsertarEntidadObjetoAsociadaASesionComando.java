@@ -1,5 +1,6 @@
 package persistidor.comandos;
 
+import persistidor.excepciones.NadaQuePersistirException;
 import persistidor.excepciones.TipoOValorInvalidoException;
 
 public interface IInsertarEntidadObjetoAsociadaASesionComando
@@ -10,6 +11,7 @@ public interface IInsertarEntidadObjetoAsociadaASesionComando
 	 * @param idSesion ID de la sesion.
 	 * @param object instancia a persistir en la DB.
 	 * @throws TipoOValorInvalidoException 
+	 * @throws NadaQuePersistirException 
 	**/
-	void ejecutar(long idSesion, Object object) throws TipoOValorInvalidoException;
+	void ejecutar(long idSesion, Object object) throws TipoOValorInvalidoException, NadaQuePersistirException;
 }

@@ -1,5 +1,6 @@
 package persistidor.comandos;
 
+import persistidor.excepciones.NadaQuePersistirException;
 import persistidor.excepciones.NoExisteSesionException;
 import persistidor.excepciones.TipoOValorInvalidoException;
 
@@ -13,6 +14,7 @@ public interface IActualizarEntidadObjetoAsociadaASesionComando
 	 * @param idSesion ID de la sesion.
 	 * @param clazz clase de la instancia a actualizar.
 	 * @throws TipoOValorInvalidoException 
+	 * @throws NadaQuePersistirException 
     **/
-	void ejecutar(long idSesion, Object o) throws NoExisteSesionException, TipoOValorInvalidoException;
+	void ejecutar(long idSesion, Object o) throws NoExisteSesionException, TipoOValorInvalidoException, NadaQuePersistirException;
 }
