@@ -9,8 +9,8 @@ public class Persona
 {
 	private int dni;
 	private String nombre;
-	private ArrayList<String> telefonos;
-	private Direccion laMejorDireccion;
+	@NotPersistable private ArrayList<String> telefonos;
+	@NotPersistable private Direccion laMejorDireccion;
 	private ArrayList<Direccion> direcciones;
 
 	public Persona()
