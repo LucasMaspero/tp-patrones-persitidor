@@ -1,0 +1,30 @@
+package persistidor.comandos;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class VerificarSiClaseEsUnPrimitivoComando implements IVerificarSiClaseEsUnPrimitivoComando
+{
+	public boolean ejecutar(Class<?> clase)
+	{
+		boolean esString = clase == String.class;
+		boolean esInteger = clase.isPrimitive() || clase == Integer.class;
+		boolean esByte = clase.isPrimitive() || clase == Byte.class;
+		boolean esShort = clase.isPrimitive() || clase == Short.class;
+		boolean esLong = clase.isPrimitive() || clase == Long.class;
+		boolean esFloat = clase.isPrimitive() || clase == Float.class;
+		boolean esDouble = clase.isPrimitive() || clase == Double.class;
+		boolean esChar = clase.isPrimitive() || clase == Character.class;
+		boolean esBoolean = clase.isPrimitive() || clase == Boolean.class;
+		
+		return esString ||
+			   esInteger ||
+			   esByte ||
+			   esShort ||
+			   esLong ||
+			   esFloat ||
+			   esDouble ||
+			   esChar ||
+			   esBoolean;
+	}
+}

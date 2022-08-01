@@ -1,6 +1,7 @@
 package persistidor.comandos;
 
 import persistidor.entidades.Objeto;
+import persistidor.excepciones.TipoOValorInvalidoException;
 
 public interface ICrearEntidadObjetoDesdeUnObjectComando
 {
@@ -10,6 +11,7 @@ public interface ICrearEntidadObjetoDesdeUnObjectComando
 	 * no agregara dicha propiedad a la entidad Objeto.
 	 * NOTA: este metodo no setea IDs en ninguna entidad.
 	 * @param object object a partir del cual se creara la entidad objeto.
+	 * @throws TipoOValorInvalidoException 
 	**/
-	Objeto ejecutar(Object object);
+	Objeto ejecutar(Object object) throws TipoOValorInvalidoException;
 }

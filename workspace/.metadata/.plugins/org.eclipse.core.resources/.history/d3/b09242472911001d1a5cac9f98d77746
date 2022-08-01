@@ -1,0 +1,7 @@
+package persistidor.comandos;
+
+public interface IVerificarSiClaseEsUnTipoValidoComando
+{
+	
+	boolean ejecutar(Class<?> clase);
+}

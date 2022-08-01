@@ -46,7 +46,7 @@ public class PersistentObject implements IPersistentObject
 		
 		Class<?> claseDelObjeto = o.getClass();
 		
-		if (!validarTipoDeObjectComando.esValido(o))
+		if (!validarTipoDeObjectComando.esValidoParaPersistirDirectamente(o))
 		{
 			throw new TipoOValorInvalidoException("PeristentObject NO guarda objects de tipo " + claseDelObjeto.getTypeName());
 		}

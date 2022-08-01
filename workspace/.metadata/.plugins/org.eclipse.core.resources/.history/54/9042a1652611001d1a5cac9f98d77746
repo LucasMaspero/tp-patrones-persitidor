@@ -1,0 +1,33 @@
+package persistidor.comandos;
+
+import java.util.Collection;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class VerificarSiClaseEsUnPrimitivoComando
+{
+	public boolean esValido(Class<?> clase)
+	{
+		boolean esString = claseDelObjeto == String.class;
+		boolean esInteger = claseDelObjeto.isPrimitive() || claseDelObjeto == Integer.class;
+		boolean esByte = claseDelObjeto.isPrimitive() || claseDelObjeto == Byte.class;
+		boolean esShort = claseDelObjeto.isPrimitive() || claseDelObjeto == Short.class;
+		boolean esLong = claseDelObjeto.isPrimitive() || claseDelObjeto == Long.class;
+		boolean esFloat = claseDelObjeto.isPrimitive() || claseDelObjeto == Float.class;
+		boolean esDouble = claseDelObjeto.isPrimitive() || claseDelObjeto == Double.class;
+		boolean esChar = claseDelObjeto.isPrimitive() || claseDelObjeto == Character.class;
+		boolean esBoolean = claseDelObjeto.isPrimitive() || claseDelObjeto == Boolean.class;
+		
+		return !esString &&
+			   !esInteger &&
+			   !esByte &&
+			   !esShort &&
+			   !esLong &&
+			   !esFloat &&
+			   !esDouble &&
+			   !esChar &&
+			   !esBoolean;
+	}
+}

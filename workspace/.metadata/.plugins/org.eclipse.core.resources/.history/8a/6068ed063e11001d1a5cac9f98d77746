@@ -1,0 +1,28 @@
+package persistidor.comandos;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.stereotype.Component;
+import persistidor.entidades.Atributo;
+import persistidor.entidades.Clase;
+import persistidor.excepciones.TipoOValorInvalidoException;
+
+@Component
+public class CrearEntidadClaseDesdeClassComando
+{
+	public Clase crearEntidadClase(Class clase, List<Clase> entidadesClaseYaCreadas) throws TipoOValorInvalidoException
+	{
+		String nombreDeClase = clase.getName();
+		Field[] atributos = clase.getDeclaredFields();
+		List<Atributo> entidadesAtributos = new ArrayList<Atributo>();
+
+		for (Field atributo : atributos)
+		{
+			Atributo entidadAtributo = crearEntidadAtributo(atributo, entidadesClaseYaCreadas);
+			entidadesAtributos.add(entidadAtributo);
+		}
+		
+		return new Clase(nombreDeClase, entidadesAtributos);
+	}
+}

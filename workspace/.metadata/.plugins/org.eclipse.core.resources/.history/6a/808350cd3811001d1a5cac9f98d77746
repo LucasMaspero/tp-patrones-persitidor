@@ -1,0 +1,152 @@
+package persistidor.comandos;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import persistidor.entidades.Objeto;
+import persistidor.servicios.IServicioDePrimitivos;
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import persistidor.entidades.Atributo;
+import persistidor.entidades.Clase;
+import persistidor.entidades.Primitivo;
+import persistidor.entidades.Valor;
+import persistidor.excepciones.TipoOValorInvalidoException;
+import persistidor.servicios.IServicioDeClases;
+import persistidor.servicios.ServicioDeClases;
+import persistidor.servicios.ServicioDePrimitivos;
+
+@Component
+public class CrearEntidadObjetoDesdeUnObjectComando implements ICrearEntidadObjetoDesdeUnObjectComando
+{
+	@Autowired
+	private IServicioDePrimitivos servicioDePrimitivos;
+	
+	@Autowired
+	private IServicioDeClases servicioDeClases;
+	
+	@Autowired
+	private IVerificarSiClaseEsUnPrimitivoComando verificarSiClaseEsUnPrimitivoComando;
+	
+	@Autowired
+	private IVerificarSiClaseEsUnTipoValidoComando verificarSiClaseEsUnTipoValidoComando;
+	
+	public Objeto ejecutar(Object o) throws TipoOValorInvalidoException
+	{
+		Class clase = o.getClass();
+		Clase entidadClase = crearClase(clase, new ArrayList<Clase>());
+		
+		List<Valor> entidadesValores = new ArrayList<Valor>();
+		
+		System.out.println(entidadClase);
+
+		return new Objeto(entidadClase, entidadesValores);
+	}
+	
+	private Clase crearClase(Class clase, List<Clase> entidadesClaseYaCreadas) throws TipoOValorInvalidoException
+	{
+		String nombreDeClase = clase.getName();
+		Field[] atributos = clase.getDeclaredFields();
+		List<Atributo> entidadesAtributos = new ArrayList<Atributo>();
+
+		for (Field atributo : atributos)
+		{
+			String nombreDeAtributo = atributo.getName();
+			Class<?> claseDelAtributo = atributo.getType();
+			boolean esPrimitivo = verificarSiClaseEsUnPrimitivoComando.ejecutar(claseDelAtributo);
+			boolean esColeccion = Collection.class.isAssignableFrom(claseDelAtributo);
+			String nombreDeClaseDelAtributo = claseDelAtributo.getTypeName();
+			String nombreNormalizadoDeClaseDelAtributo = normalizarNombreDeClase(nombreDeClaseDelAtributo);
+			
+			if (!verificarSiClaseEsUnTipoValidoComando.ejecutar(claseDelAtributo))
+			{
+				throw new TipoOValorInvalidoException("PeristentObject NO guarda objects de tipo " + nombreDeClaseDelAtributo);
+			}
+			
+			Class genericDelAtributoColeccion = esColeccion ? obtenerGenericDeColeccion(atributo) : null;
+			String nombreDeClaseDelGeneric = esColeccion ? genericDelAtributoColeccion.getTypeName() : null;
+			String nombreNormalizadoDeClaseDelGeneric = esColeccion ? normalizarNombreDeClase(nombreDeClaseDelGeneric) : null;
+			boolean genericDelAtributoColeccionEsPrimitivo = esColeccion ? verificarSiClaseEsUnPrimitivoComando.ejecutar(genericDelAtributoColeccion) : false;
+			
+			if (esColeccion && genericDelAtributoColeccionEsPrimitivo)
+			{
+				Primitivo entidadPrimitivo = servicioDePrimitivos.ObtenerPrimitivoPorNombre(nombreNormalizadoDeClaseDelGeneric);
+				Atributo entidadAtributo = new Atributo(nombreDeAtributo, entidadPrimitivo, true);
+				entidadesAtributos.add(entidadAtributo);
+				continue;
+			}
+			
+			if (!esColeccion && esPrimitivo)
+			{
+				Primitivo entidadPrimitivo = servicioDePrimitivos.ObtenerPrimitivoPorNombre(nombreNormalizadoDeClaseDelAtributo);
+				Atributo entidadAtributo = new Atributo(nombreDeAtributo, entidadPrimitivo, false);
+				entidadesAtributos.add(entidadAtributo);
+				continue;
+			}
+			
+			if (esColeccion)
+			{
+				Primitivo entidadPrimitivo = servicioDePrimitivos.ObtenerPrimitivoPorNombre(nombreNormalizadoDeClaseDelAtributo);
+				Atributo entidadAtributo = new Atributo(nombreDeAtributo, entidadPrimitivo, false);
+				entidadesAtributos.add(entidadAtributo);
+				continue;
+			}
+			
+			Clase entidadClaseDelAtributo= null;
+			for (Clase entidadClaseYaCreada : entidadesClaseYaCreadas)
+			{
+				if (entidadClaseYaCreada.getNombre() == nombreNormalizadoDeClaseDelAtributo)
+				{
+					entidadClaseDelAtributo = entidadClaseYaCreada;
+					break;
+				}
+			}
+			
+			if (entidadClaseDelAtributo == null)
+			{
+				entidadClaseDelAtributo = crearClase(claseDelAtributo, entidadesClaseYaCreadas);
+				entidadesClaseYaCreadas.add(entidadClaseDelAtributo);
+			}
+			
+			Atributo entidadAtributo = new Atributo(nombreDeAtributo, entidadClaseDelAtributo, esColeccion);
+			entidadesAtributos.add(entidadAtributo);
+		}
+		
+		return new Clase(nombreDeClase, entidadesAtributos);
+	}
+	
+	private String normalizarNombreDeClase(String nombreDeClase)
+	{
+		return nombreDeClase == "java.lang.String" ? "string" : nombreDeClase;
+	}
+
+	private Class obtenerGenericDeColeccion(Field atributo) throws TipoOValorInvalidoException
+	{
+		try
+		{
+			ParameterizedType genericDeColeccion = (ParameterizedType) atributo.getGenericType();
+			Class genericDelAtributoColeccion = (Class<?>) genericDeColeccion.getActualTypeArguments()[0];
+			String nombreDeClaseDelGeneric = genericDelAtributoColeccion.getTypeName();
+			
+			if (!verificarSiClaseEsUnTipoValidoComando.ejecutar(genericDelAtributoColeccion))
+			{
+				throw new TipoOValorInvalidoException("PeristentObject NO guarda objects de tipo " + nombreDeClaseDelGeneric);
+			}
+			
+			boolean genericDelAtributoColeccionEsColeccion = Collection.class.isAssignableFrom(genericDelAtributoColeccion);
+			
+			if (genericDelAtributoColeccionEsColeccion)
+			{
+				throw new TipoOValorInvalidoException("PeristentObject NO guarda colecciones de colecciones");
+			}
+			
+			return genericDelAtributoColeccion;
+		}
+		catch (Exception ex)
+		{
+			throw new TipoOValorInvalidoException("NO se aceptan colecciones sin generics");
+		}
+	}
+}

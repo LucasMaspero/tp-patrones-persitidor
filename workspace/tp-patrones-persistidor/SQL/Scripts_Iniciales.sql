@@ -20,7 +20,7 @@ CREATE TABLE primitivo (
    nombre VARCHAR NOT NULL
 );
 
-INSERT INTO primitivo (nombre) VALUES ('String');
+INSERT INTO primitivo (nombre) VALUES ('string');
 INSERT INTO primitivo (nombre) VALUES ('int');
 INSERT INTO primitivo (nombre) VALUES ('byte');
 INSERT INTO primitivo (nombre) VALUES ('short');

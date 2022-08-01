@@ -13,6 +13,7 @@ public class ServicioDePrimitivos implements IServicioDePrimitivos
 	
 	public Primitivo ObtenerPrimitivoPorNombre(String nombrePrimitivo)
 	{
-		return repositorioDePrimitivos.obtenerPrimitivoPorNombre(nombrePrimitivo);
+		String nombrePrimitivoNormalizado = nombrePrimitivo.toLowerCase();
+		return repositorioDePrimitivos.obtenerPrimitivoPorNombre(nombrePrimitivoNormalizado);
 	}
 }

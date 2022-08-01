@@ -1,0 +1,13 @@
+package persistidor.comandos;
+
+import persistidor.entidades.Clase;
+import persistidor.excepciones.TipoOValorInvalidoException;
+
+public interface ICrearEntidadClaseDesdeClassComando
+{
+	/**
+     * Crea una entidad clase desde 
+     * @param object Object a validar.
+    **/
+	Clase ejecutar(Class clase) throws TipoOValorInvalidoException;
+}

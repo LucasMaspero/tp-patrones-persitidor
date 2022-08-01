@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import persistidor.entidades.Objeto;
 import persistidor.entidades.Sesion;
+import persistidor.excepciones.TipoOValorInvalidoException;
 import persistidor.servicios.IServicioDeSesiones;
 
 @Component
@@ -19,7 +20,7 @@ public class InsertarEntidadObjetoAsociadaASesionComando implements IInsertarEnt
 	@Autowired
 	private ICrearEntidadObjetoDesdeUnObjectComando crearEntidadObjetoDesdeUnObjectComando;
 	
-	public void ejecutar(long idSesion, Object object)
+	public void ejecutar(long idSesion, Object object) throws TipoOValorInvalidoException
 	{
 		Sesion sesionActual = crearSesionSiNoExisteUObtenerSesionActualComando.ejecutar(idSesion);
 		

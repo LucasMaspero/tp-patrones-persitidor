@@ -6,7 +6,7 @@ import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
 
 @Retention(RetentionPolicy.CLASS)
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ElementType.FIELD, ElementType.TYPE})
 public @interface Persistable
 {
 }

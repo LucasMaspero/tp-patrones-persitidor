@@ -3,6 +3,7 @@ package persistidor.comandos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import persistidor.excepciones.NoExisteSesionException;
+import persistidor.excepciones.TipoOValorInvalidoException;
 
 @Component
 public class ActualizarEntidadObjetoAsociadaASesionComando implements IActualizarEntidadObjetoAsociadaASesionComando
@@ -13,7 +14,7 @@ public class ActualizarEntidadObjetoAsociadaASesionComando implements IActualiza
 	@Autowired
 	private IInsertarEntidadObjetoAsociadaASesionComando insertarEntidadObjetoAsociadaASesionComando;
 	
-	public void ejecutar(long idSesion, Object object) throws NoExisteSesionException
+	public void ejecutar(long idSesion, Object object) throws NoExisteSesionException, TipoOValorInvalidoException
 	{
 		Class<?> claseDelObjeto = object.getClass();
 		

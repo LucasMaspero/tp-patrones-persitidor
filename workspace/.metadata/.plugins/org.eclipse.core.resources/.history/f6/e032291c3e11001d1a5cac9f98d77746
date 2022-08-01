@@ -1,0 +1,14 @@
+package persistidor.comandos;
+
+import java.util.List;
+
+import persistidor.entidades.Clase;
+import persistidor.excepciones.TipoOValorInvalidoException;
+
+public interface ICrearEntidadClaseDesdeClassComando
+{
+	/**
+     * Valida si un object es apto para que el PersistenObject lo pueda persistir.
+     * @param object Object a validar.
+    **/
+	Clase ejecutar(Class clase, List<Clase> entidadesClaseYaCreadas) throws TipoOValorInvalidoException;

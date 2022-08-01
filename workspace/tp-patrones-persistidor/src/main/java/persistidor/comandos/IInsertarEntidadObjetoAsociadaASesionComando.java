@@ -1,5 +1,7 @@
 package persistidor.comandos;
 
+import persistidor.excepciones.TipoOValorInvalidoException;
+
 public interface IInsertarEntidadObjetoAsociadaASesionComando
 {
 	/**
@@ -7,6 +9,7 @@ public interface IInsertarEntidadObjetoAsociadaASesionComando
 	 * Ademas actualiza la ultima fecha de acceso a la sesion.
 	 * @param idSesion ID de la sesion.
 	 * @param object instancia a persistir en la DB.
+	 * @throws TipoOValorInvalidoException 
 	**/
-	void ejecutar(long idSesion, Object object);
+	void ejecutar(long idSesion, Object object) throws TipoOValorInvalidoException;
 }
