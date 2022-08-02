@@ -1,5 +1,0 @@
-ACLARACIONES:
-
-* NO guarda nulls directamente, ejemplo: Persistidor.store(null);
-* NO persiste directamente un primitivo, ejemplo: Persistidor.store(2);
-* NO persiste directamente un array, ejemplo: Persistidor.store(ArrayList<int>);

@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="if (entidadAtributoRelacionada.esPrimitivo() &amp;&amp; entidadAtributoRelacionada.esColeccion())" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="cambio la"/>
 			<item value="if (entidadAtributoRelacionada.esPrimitivo() &amp;&amp; entidadAtributoRelacionada.esColeccion())"/>
 			<item value="&amp;&amp;"/>
 			<item value="claseDelObjeto"/>
@@ -15,7 +16,6 @@
 			<item value="for (Clase clase : clasesAEliminar)"/>
 			<item value="CLASE_ATRIBUTOS"/>
 			<item value="Direccion1"/>
-			<item value="LaMejorDireccion"/>
 		</list>
 		<list key="replacehistory">
 			<item value="||"/>

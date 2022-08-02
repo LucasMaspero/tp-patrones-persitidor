@@ -78,6 +78,7 @@ public class CrearObjectDesdeEntidadObjetoComando implements ICrearObjectDesdeEn
 		}
 		catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException | ClassNotFoundException | InstantiationException ex)
 		{
+			System.out.println(ex.getMessage());
 			throw new StructureChangedException(ex);
 		}
 	}

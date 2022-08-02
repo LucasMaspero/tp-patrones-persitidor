@@ -1,0 +1,27 @@
+package persistidor.controladores;
+
+import persistidor.anotaciones.Persistable;
+
+@Persistable
+public class Persona1
+{
+	private int dni;
+	
+	public Persona1() 
+	{
+	}
+	
+	public Persona1(int dni)
+	{
+		this.dni=dni;
+	}
+	
+	public int getDni()
+	{
+		return dni;
+	}
+	public void setDni(int dni)
+	{
+		this.dni=dni;
+	}
+}

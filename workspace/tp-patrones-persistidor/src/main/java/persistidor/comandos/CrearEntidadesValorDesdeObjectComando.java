@@ -63,14 +63,30 @@ public class CrearEntidadesValorDesdeObjectComando implements ICrearEntidadesVal
 						Collection coleccion = (Collection)atributo.get(o);
 						for (Object valorDeColeccion : coleccion)
 						{
-							Valor valorDelAtributo = crearValorDesdeValorObjetoDeAtributo(valorDeColeccion, entidadAtributoRelacionada);
+							Class claseDelValorDeColeccion = valorDeColeccion.getClass();
+							
+							if (!claseDelValorDeColeccion.isAnnotationPresent(Persistable.class) || claseDelValorDeColeccion.isAnnotationPresent(NotPersistable.class))
+							{
+								continue;
+							}
+							
+							Valor valorDelAtributo = crearValorDesdeValorObjetoDeAtributo(valorDeColeccion, entidadAtributoRelacionada, claseDelValorDeColeccion);
 							entidadesValores.add(valorDelAtributo);
 						}
 					}
 					else
 					{
 						Object valorObjetoDelAtributo = atributo.get(o);
-						entidadesValores.add(crearValorDesdeValorObjetoDeAtributo(valorObjetoDelAtributo, entidadAtributoRelacionada));
+						Class claseDelValorObjetoDelAtributo = valorObjetoDelAtributo.getClass();
+						
+						if (!claseDelValorObjetoDelAtributo.isAnnotationPresent(Persistable.class) || claseDelValorObjetoDelAtributo.isAnnotationPresent(NotPersistable.class))
+						{
+							continue;
+						}
+						
+						Valor valorDelAtributo = crearValorDesdeValorObjetoDeAtributo(valorObjetoDelAtributo, entidadAtributoRelacionada, claseDelValorObjetoDelAtributo);
+						
+						entidadesValores.add(valorDelAtributo);
 					}
 				}
 			}
@@ -83,11 +99,10 @@ public class CrearEntidadesValorDesdeObjectComando implements ICrearEntidadesVal
 		}
 	}
 	
-	private Valor crearValorDesdeValorObjetoDeAtributo(Object valorObjetoDelAtributo, Atributo entidadAtributoRelacionada) throws TipoOValorInvalidoException
+	private Valor crearValorDesdeValorObjetoDeAtributo(Object valorObjetoDelAtributo, Atributo entidadAtributoRelacionada, Class claseDelValorObjetoDelAtributo) throws TipoOValorInvalidoException
 	{
 		try
 		{
-			Class claseDelValorObjetoDelAtributo = valorObjetoDelAtributo.getClass();
 			Clase entidadClaseDelValorObjetoDelAtributo = entidadAtributoRelacionada.getTipoClase();
 			List<Valor> entidadesValoresDelValorObjetoDelAtributo = ejecutar(claseDelValorObjetoDelAtributo, entidadClaseDelValorObjetoDelAtributo, valorObjetoDelAtributo);
 			Objeto entidadObjetoDelAtributo = new Objeto(entidadClaseDelValorObjetoDelAtributo, entidadesValoresDelValorObjetoDelAtributo);
